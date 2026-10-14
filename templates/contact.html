@@ -1,0 +1,1667 @@
+{% extends 'basic.html' %}
+{% load static %}
+
+{% block title %}Contact{% endblock title %}
+
+{% block body %}
+
+<style>
+
+/* =====================================================
+   CONTACT PAGE
+===================================================== */
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.page-hero {
+    min-height: 55vh;
+    display: flex;
+    align-items: center;
+
+    background:
+        radial-gradient(
+            circle at 80% 25%,
+            rgba(108,99,255,.18),
+            transparent 35%
+        ),
+        var(--dark);
+
+    color: white;
+    padding-top: 100px;
+}
+
+.page-label {
+    color: var(--primary);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .8rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.page-hero h1 {
+    font-size: clamp(3rem, 7vw, 5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    margin-bottom: 20px;
+}
+
+.page-hero h1 span {
+    color: var(--primary);
+}
+
+.page-hero p {
+    max-width: 720px;
+    color: #94a3b8;
+    font-size: 1.05rem;
+    line-height: 1.9;
+}
+
+.breadcrumb {
+    margin-top: 30px;
+}
+
+.breadcrumb-item a {
+    color: #94a3b8;
+    text-decoration: none;
+}
+
+.breadcrumb-item.active {
+    color: var(--primary);
+}
+
+
+/* =====================================================
+   SECTION HEADINGS
+===================================================== */
+
+.section-label {
+    color: var(--primary);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .8rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.section-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.section-description {
+    color: var(--text);
+    line-height: 1.9;
+    max-width: 700px;
+}
+
+
+/* =====================================================
+   CONTACT SECTION
+===================================================== */
+
+.contact-section {
+    background: #ffffff;
+}
+
+
+/* =====================================================
+   CONTACT INFORMATION
+===================================================== */
+
+.contact-info {
+    padding-right: 40px;
+}
+
+.contact-info h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 18px;
+}
+
+.contact-info > p {
+    color: var(--text);
+    line-height: 1.9;
+    margin-bottom: 35px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.contact-icon {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    border-radius: 10px;
+    background: #f1f5f9;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--primary);
+    font-size: 1.2rem;
+}
+
+.contact-item h6 {
+    margin-bottom: 5px;
+    font-size: .85rem;
+    font-weight: 700;
+}
+
+.contact-item p {
+    margin: 0;
+    color: var(--text);
+    font-size: .85rem;
+    line-height: 1.6;
+}
+
+.contact-item a {
+    color: var(--text);
+    text-decoration: none;
+    transition: .3s;
+}
+
+.contact-item a:hover {
+    color: var(--primary);
+}
+
+
+/* =====================================================
+   SOCIAL LINKS
+===================================================== */
+
+.social-title {
+    font-size: .8rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.social-links {
+    display: flex;
+    gap: 10px;
+}
+
+.social-link {
+    width: 42px;
+    height: 42px;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #475569;
+    text-decoration: none;
+
+    transition: .3s;
+}
+
+.social-link:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+    transform: translateY(-3px);
+}
+
+
+/* =====================================================
+   CONTACT FORM CARD
+===================================================== */
+
+.contact-form-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 40px;
+
+    box-shadow:
+        0 20px 60px rgba(15,23,42,.07);
+}
+
+.contact-form-card h3 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.contact-form-card .form-intro {
+    color: var(--text);
+    font-size: .85rem;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+
+/* =====================================================
+   CONTACT FORM LABEL
+===================================================== */
+
+.contact-form-card .form-label {
+    font-size: .8rem;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 8px;
+}
+
+
+/* =====================================================
+   CONTACT FORM INPUT
+   IMPORTANT:
+   Scoped to .contact-form-card so it does not
+   conflict with login/signup forms.
+===================================================== */
+
+.contact-form-card .form-control {
+    width: 100%;
+    background: #ffffff;
+    color: #1e293b;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+
+    padding: 13px 15px;
+
+    font-size: .85rem;
+
+    transition: .3s;
+}
+
+.contact-form-card .form-control::placeholder {
+    color: #94a3b8;
+    opacity: 1;
+}
+
+.contact-form-card .form-control:focus {
+    background: #ffffff;
+    color: #1e293b;
+
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px rgba(108,99,255,.1);
+
+    outline: none;
+}
+
+
+/* =====================================================
+   CONTACT SELECT
+===================================================== */
+
+.contact-form-card .form-select {
+    width: 100%;
+
+    background-color: #ffffff;
+    color: #334155;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+
+    padding: 13px 14px;
+
+    font-size: .85rem;
+
+    transition: .3s;
+}
+
+.contact-form-card .form-select:focus {
+    background-color: #ffffff;
+    color: #334155;
+
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px rgba(108,99,255,.1);
+
+    outline: none;
+}
+
+
+/* =====================================================
+   TEXTAREA
+===================================================== */
+
+.contact-form-card textarea.form-control {
+    min-height: 150px;
+    resize: vertical;
+}
+
+
+/* =====================================================
+   FORM VALIDATION
+===================================================== */
+
+.contact-form-card .form-control:invalid:not(:placeholder-shown),
+.contact-form-card .form-select:invalid:not(:focus) {
+    border-color: #dc3545;
+}
+
+.contact-form-card .form-control:valid,
+.contact-form-card .form-select:valid {
+    border-color: #e2e8f0;
+}
+
+
+/* =====================================================
+   SEND BUTTON
+===================================================== */
+
+.contact-form-card .btn-primary-custom {
+    background: var(--primary);
+    border: none;
+    color: white;
+
+    padding: 14px 25px;
+
+    border-radius: 8px;
+
+    font-weight: 600;
+    font-size: .85rem;
+
+    transition: .3s;
+}
+
+.contact-form-card .btn-primary-custom:hover {
+    background: var(--primary-dark);
+    color: white;
+
+    transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   DJANGO MESSAGES
+===================================================== */
+
+.contact-form-card .alert {
+    border-radius: 8px;
+    font-size: .85rem;
+}
+
+
+/* =====================================================
+   AVAILABILITY
+===================================================== */
+
+.availability {
+    margin-top: 35px;
+    padding: 20px;
+
+    border-radius: 10px;
+
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+}
+
+.availability-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 7px;
+}
+
+.status-dot {
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: #22c55e;
+
+    box-shadow:
+        0 0 0 4px rgba(34,197,94,.12);
+}
+
+.availability strong {
+    font-size: .8rem;
+}
+
+.availability p {
+    margin: 0;
+
+    color: var(--text);
+
+    font-size: .75rem;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   WHY CONTACT ME
+===================================================== */
+
+.why-section {
+    background: var(--light);
+}
+
+.why-card {
+    background: white;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+
+    padding: 30px;
+
+    height: 100%;
+
+    transition: .3s;
+}
+
+.why-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 20px 45px rgba(15,23,42,.08);
+}
+
+.why-icon {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 10px;
+
+    background: #eef2ff;
+    color: var(--primary);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.2rem;
+
+    margin-bottom: 20px;
+}
+
+.why-card h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.why-card p {
+    color: var(--text);
+    font-size: .82rem;
+    line-height: 1.8;
+    margin: 0;
+}
+
+
+/* =====================================================
+   FAQ
+===================================================== */
+
+.faq-section {
+    background: white;
+}
+
+.accordion-item {
+    border: 1px solid #e2e8f0;
+
+    margin-bottom: 12px;
+
+    border-radius: 8px !important;
+
+    overflow: hidden;
+}
+
+.accordion-button {
+    font-size: .9rem;
+    font-weight: 600;
+
+    color: #1e293b;
+
+    padding: 20px;
+
+    box-shadow: none !important;
+}
+
+.accordion-button:not(.collapsed) {
+    background: #f8fafc;
+    color: var(--primary);
+}
+
+.accordion-body {
+    color: var(--text);
+
+    font-size: .85rem;
+    line-height: 1.8;
+
+    padding: 0 20px 20px;
+}
+
+
+/* =====================================================
+   CTA
+===================================================== */
+
+.cta {
+    background:
+        linear-gradient(
+            135deg,
+            #0b0f19,
+            #172033
+        );
+
+    color: white;
+}
+
+.cta-content {
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+}
+
+.cta h2 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.cta p {
+    color: #94a3b8;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.btn-outline-custom {
+    border: 1px solid rgba(255,255,255,.2);
+    color: white;
+
+    padding: 13px 25px;
+
+    border-radius: 8px;
+
+    font-weight: 600;
+    font-size: .85rem;
+
+    transition: .3s;
+}
+
+.btn-outline-custom:hover {
+    background: white;
+    color: var(--dark);
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .contact-info {
+        padding-right: 0;
+    }
+
+    .contact-form-card {
+        padding: 25px;
+    }
+
+    .section-title {
+        font-size: 2.2rem;
+    }
+
+    .cta h2 {
+        font-size: 2.2rem;
+    }
+
+}
+
+</style>
+
+<!-- =====================================================
+     PAGE HERO
+===================================================== -->
+
+<section class="page-hero">
+
+
+<div class="container">
+
+    <p class="page-label">
+        05. CONTACT
+    </p>
+
+    <h1>
+        Let's Work
+        <span>Together.</span>
+    </h1>
+
+    <p>
+        Have an idea, a project, or a problem that needs
+        solving? Send me a message and let's discuss how
+        I can help turn your idea into a working digital
+        solution.
+    </p>
+
+    <nav aria-label="breadcrumb">
+
+        <ol class="breadcrumb">
+
+            <li class="breadcrumb-item">
+                <a href="/">
+                    Home
+                </a>
+            </li>
+
+            <li class="breadcrumb-item active">
+                Contact
+            </li>
+
+        </ol>
+
+    </nav>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     CONTACT AREA
+===================================================== -->
+
+<section class="contact-section" id="contact-form">
+
+
+<div class="container">
+
+    <div class="row g-5">
+
+
+        <!-- =================================================
+             CONTACT INFORMATION
+        ================================================== -->
+
+        <div class="col-lg-5">
+
+            <div class="contact-info">
+
+                <p class="section-label">
+                    GET IN TOUCH
+                </p>
+
+                <h2>
+                    Have a project
+                    in mind?
+                </h2>
+
+                <p>
+                    Whether you need a business website,
+                    web application, Django system, or
+                    database-driven platform, I'd love to
+                    hear about it.
+
+                    Tell me what you're building and I'll
+                    get back to you as soon as possible.
+                </p>
+
+
+                <!-- EMAIL -->
+
+                <div class="contact-item">
+
+                    <div class="contact-icon">
+                        <i class="bi bi-envelope"></i>
+                    </div>
+
+                    <div>
+
+                        <h6>
+                            Email
+                        </h6>
+
+                        <p>
+                            <a href="mailto:ebiwannoolajide2022@gmail.com">
+                                ebiwannoolajide2022@gmail.com
+                            </a>
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div class="contact-item">
+
+                    <div class="contact-icon">
+                        <i class="bi bi-telephone"></i>
+                    </div>
+
+                    <div>
+
+                        <h6>
+                            Phone
+                        </h6>
+
+                        <p>
+                            <a href="tel:+2349077479172">
+                                +234 9077479172
+                            </a>
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LOCATION -->
+
+                <div class="contact-item">
+
+                    <div class="contact-icon">
+                        <i class="bi bi-geo-alt"></i>
+                    </div>
+
+                    <div>
+
+                        <h6>
+                            Location
+                        </h6>
+
+                        <p>
+                            Nigeria
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- WORK TYPE -->
+
+                <div class="contact-item">
+
+                    <div class="contact-icon">
+                        <i class="bi bi-laptop"></i>
+                    </div>
+
+                    <div>
+
+                        <h6>
+                            Work Type
+                        </h6>
+
+                        <p>
+                            Freelance · Remote · Contract
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- AVAILABILITY -->
+
+                <div class="availability">
+
+                    <div class="availability-top">
+
+                        <span class="status-dot"></span>
+
+                        <strong>
+                            Currently Available
+                        </strong>
+
+                    </div>
+
+                    <p>
+                        I'm currently open to freelance
+                        projects, collaborations and
+                        interesting web development
+                        opportunities.
+                    </p>
+
+                </div>
+
+
+                <!-- SOCIAL -->
+
+                <div class="mt-4">
+
+                    <div class="social-title">
+                        FOLLOW / CONNECT
+                    </div>
+
+                    <div class="social-links">
+
+                        <a href="#"
+                           class="social-link"
+                           aria-label="GitHub">
+
+                            <i class="bi bi-github"></i>
+
+                        </a>
+
+                        <a href="#"
+                           class="social-link"
+                           aria-label="LinkedIn">
+
+                            <i class="bi bi-linkedin"></i>
+
+                        </a>
+
+                        <a href="#"
+                           class="social-link"
+                           aria-label="Twitter">
+
+                            <i class="bi bi-twitter-x"></i>
+
+                        </a>
+
+                        <a href="#"
+                           class="social-link"
+                           aria-label="Instagram">
+
+                            <i class="bi bi-instagram"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             CONTACT FORM
+        ================================================== -->
+
+        <div class="col-lg-7">
+
+            <div class="contact-form-card">
+
+                <h3>
+                    Send Me a Message
+                </h3>
+
+                <p class="form-intro">
+                    Fill out the form below with some
+                    information about your project. I'll
+                    review your message and get back to you.
+                </p>
+
+
+                <!-- =================================================
+                     DJANGO MESSAGES
+                ================================================== -->
+
+                {% if messages %}
+
+                    {% for message in messages %}
+
+                        <div class="alert alert-{{ message.tags }} mb-4"
+                             role="alert">
+
+                            {{ message }}
+
+                        </div>
+
+                    {% endfor %}
+
+                {% endif %}
+
+
+                <!-- =================================================
+                     FORM
+                ================================================== -->
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+
+                    <div class="row">
+
+
+                        <!-- NAME -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label
+                                for="name"
+                                class="form-label">
+
+                                Your Name
+
+                            </label>
+
+                            <input
+                                type="text"
+                                id="name"
+                                class="form-control"
+                                name="name"
+                                placeholder="John Doe"
+                                required>
+
+                        </div>
+
+
+                        <!-- EMAIL -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label
+                                for="email"
+                                class="form-label">
+
+                                Email Address
+
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                class="form-control"
+                                name="email"
+                                placeholder="john@example.com"
+                                required>
+
+                        </div>
+
+
+                        <!-- PHONE -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label
+                                for="phone"
+                                class="form-label">
+
+                                Phone Number
+
+                                <span class="text-muted">
+                                    (Optional)
+                                </span>
+
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                class="form-control"
+                                placeholder="+234 000 000 0000">
+
+                        </div>
+
+
+                        <!-- SERVICE -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label
+                                for="service"
+                                class="form-label">
+
+                                Service Needed
+
+                            </label>
+
+                            <select
+                                class="form-select"
+                                id="service"
+                                name="service"
+                                required>
+
+                                <option
+                                    value=""
+                                    selected
+                                    disabled>
+
+                                    Select a service
+
+                                </option>
+
+                                <option value="Website Development">
+                                    Website Development
+                                </option>
+
+                                <option value="Web Application">
+                                    Web Application
+                                </option>
+
+                                <option value="Django Development">
+                                    Django Development
+                                </option>
+
+                                <option value="Database Development">
+                                    Database Development
+                                </option>
+
+                                <option value="Website Redesign">
+                                    Website Redesign
+                                </option>
+
+                                <option value="Website Maintenance">
+                                    Website Maintenance
+                                </option>
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- BUDGET -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label
+                                for="budget"
+                                class="form-label">
+
+                                Project Budget
+
+                            </label>
+
+                            <select
+                                class="form-select"
+                                id="budget"
+                                name="budget">
+
+                                <option
+                                    value=""
+                                    selected
+                                    disabled>
+
+                                    Select budget range
+
+                                </option>
+
+                                <option value="Under ₦100,000">
+                                    Under ₦100,000
+                                </option>
+
+                                <option value="₦100,000 - ₦250,000">
+                                    ₦100,000 - ₦250,000
+                                </option>
+
+                                <option value="₦250,000 - ₦500,000">
+                                    ₦250,000 - ₦500,000
+                                </option>
+
+                                <option value="₦500,000 - ₦1,000,000">
+                                    ₦500,000 - ₦1,000,000
+                                </option>
+
+                                <option value="₦1,000,000+">
+                                    ₦1,000,000+
+                                </option>
+
+                                <option value="Not sure yet">
+                                    Not sure yet
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- TIMELINE -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label
+                                for="timeline"
+                                class="form-label">
+
+                                Project Timeline
+
+                            </label>
+
+                            <select
+                                class="form-select"
+                                id="timeline"
+                                name="timeline">
+
+                                <option
+                                    value=""
+                                    selected
+                                    disabled>
+
+                                    Select timeline
+
+                                </option>
+
+                                <option value="ASAP">
+                                    ASAP
+                                </option>
+
+                                <option value="1 - 2 weeks">
+                                    1 - 2 weeks
+                                </option>
+
+                                <option value="1 month">
+                                    1 month
+                                </option>
+
+                                <option value="2 - 3 months">
+                                    2 - 3 months
+                                </option>
+
+                                <option value="Flexible">
+                                    Flexible
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- SUBJECT -->
+
+                        <div class="col-12 mb-3">
+
+                            <label
+                                for="subject"
+                                class="form-label">
+
+                                Subject
+
+                            </label>
+
+                            <input
+                                type="text"
+                                id="subject"
+                                class="form-control"
+                                name="subject"
+                                placeholder="What can I help you with?"
+                                required>
+
+                        </div>
+
+
+                        <!-- MESSAGE -->
+
+                        <div class="col-12">
+
+                            <label
+                                for="message"
+                                class="form-label">
+
+                                Project Details
+
+                            </label>
+
+                            <textarea
+                                id="message"
+                                class="form-control"
+                                name="message"
+                                rows="6"
+                                placeholder="Tell me about your project, goals, features you need, and any other important details..."
+                                required></textarea>
+
+                        </div>
+
+
+                        <!-- BUTTON -->
+
+                        <div class="col-12 mt-4">
+
+                            <button
+                                type="submit"
+                                class="btn btn-primary-custom">
+
+                                Send Message
+
+                                <i class="bi bi-send ms-2"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     WHY WORK WITH ME
+===================================================== -->
+
+<section class="why-section">
+
+
+<div class="container">
+
+    <div class="text-center mb-5">
+
+        <p class="section-label">
+            WHY WORK WITH ME
+        </p>
+
+        <h2 class="section-title">
+            More Than Just Code
+        </h2>
+
+        <p class="section-description mx-auto">
+            I focus on understanding the problem first,
+            then building a solution that is practical,
+            reliable and easy to use.
+        </p>
+
+    </div>
+
+
+    <div class="row g-4">
+
+
+        <!-- CARD 01 -->
+
+        <div class="col-md-6 col-lg-3">
+
+            <div class="why-card">
+
+                <div class="why-icon">
+                    <i class="bi bi-chat-square-text"></i>
+                </div>
+
+                <h4>
+                    Clear Communication
+                </h4>
+
+                <p>
+                    I keep communication simple and clear
+                    throughout the project so you always
+                    know what is happening.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- CARD 02 -->
+
+        <div class="col-md-6 col-lg-3">
+
+            <div class="why-card">
+
+                <div class="why-icon">
+                    <i class="bi bi-code-slash"></i>
+                </div>
+
+                <h4>
+                    Clean Development
+                </h4>
+
+                <p>
+                    I write structured and maintainable code
+                    that can be improved as your project
+                    grows.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- CARD 03 -->
+
+        <div class="col-md-6 col-lg-3">
+
+            <div class="why-card">
+
+                <div class="why-icon">
+                    <i class="bi bi-phone"></i>
+                </div>
+
+                <h4>
+                    Responsive Design
+                </h4>
+
+                <p>
+                    Websites and applications are designed
+                    to work properly across phones, tablets
+                    and desktop devices.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- CARD 04 -->
+
+        <div class="col-md-6 col-lg-3">
+
+            <div class="why-card">
+
+                <div class="why-icon">
+                    <i class="bi bi-rocket-takeoff"></i>
+                </div>
+
+                <h4>
+                    Growth Focused
+                </h4>
+
+                <p>
+                    I build with the future in mind so your
+                    digital product can evolve as your
+                    requirements change.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     FAQ
+===================================================== -->
+
+<section class="faq-section">
+
+
+<div class="container">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="text-center mb-5">
+
+                <p class="section-label">
+                    FAQ
+                </p>
+
+                <h2 class="section-title">
+                    Common Questions
+                </h2>
+
+            </div>
+
+
+            <div class="accordion" id="faqAccordion">
+
+
+                <!-- FAQ 01 -->
+
+                <div class="accordion-item">
+
+                    <h2 class="accordion-header">
+
+                        <button
+                            class="accordion-button"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#faqOne">
+
+                            What type of projects do you work on?
+
+                        </button>
+
+                    </h2>
+
+                    <div
+                        id="faqOne"
+                        class="accordion-collapse collapse show"
+                        data-bs-parent="#faqAccordion">
+
+                        <div class="accordion-body">
+
+                            I work on business websites,
+                            portfolios, web applications,
+                            Django applications, database
+                            systems, dashboards and custom
+                            web solutions.
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FAQ 02 -->
+
+                <div class="accordion-item">
+
+                    <h2 class="accordion-header">
+
+                        <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#faqTwo">
+
+                            Do you work with clients remotely?
+
+                        </button>
+
+                    </h2>
+
+                    <div
+                        id="faqTwo"
+                        class="accordion-collapse collapse"
+                        data-bs-parent="#faqAccordion">
+
+                        <div class="accordion-body">
+
+                            Yes. Projects can be handled
+                            remotely using online communication
+                            and collaboration tools.
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FAQ 03 -->
+
+                <div class="accordion-item">
+
+                    <h2 class="accordion-header">
+
+                        <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#faqThree">
+
+                            How long does a project take?
+
+                        </button>
+
+                    </h2>
+
+                    <div
+                        id="faqThree"
+                        class="accordion-collapse collapse"
+                        data-bs-parent="#faqAccordion">
+
+                        <div class="accordion-body">
+
+                            Project timelines depend on the
+                            features and complexity of the
+                            project. After discussing your
+                            requirements, I can provide a
+                            realistic estimated timeline.
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FAQ 04 -->
+
+                <div class="accordion-item">
+
+                    <h2 class="accordion-header">
+
+                        <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#faqFour">
+
+                            Can you work on an existing website?
+
+                        </button>
+
+                    </h2>
+
+                    <div
+                        id="faqFour"
+                        class="accordion-collapse collapse"
+                        data-bs-parent="#faqAccordion">
+
+                        <div class="accordion-body">
+
+                            Yes. I can help improve, redesign,
+                            maintain or add new features to an
+                            existing website or web application.
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FAQ 05 -->
+
+                <div class="accordion-item">
+
+                    <h2 class="accordion-header">
+
+                        <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#faqFive">
+
+                            How can I start a project with you?
+
+                        </button>
+
+                    </h2>
+
+                    <div
+                        id="faqFive"
+                        class="accordion-collapse collapse"
+                        data-bs-parent="#faqAccordion">
+
+                        <div class="accordion-body">
+
+                            Simply send me a message using the
+                            contact form above. Include as much
+                            information as possible about your
+                            project and I'll get back to you.
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="cta">
+
+
+<div class="container">
+
+    <div class="cta-content">
+
+        <p class="section-label">
+            READY TO START?
+        </p>
+
+        <h2>
+            Let's Turn Your Idea
+            Into Reality.
+        </h2>
+
+        <p>
+            Don't worry if your idea isn't fully planned
+            yet. Start the conversation and we can figure
+            out the best approach together.
+        </p>
+
+
+        <div class="d-flex
+                    justify-content-center
+                    flex-wrap
+                    gap-3">
+
+            <a
+                href="#contact-form"
+                class="btn btn-primary-custom">
+
+                Send a Message
+
+                <i class="bi bi-arrow-right ms-2"></i>
+
+            </a>
+
+
+            <a
+                href="/projects/" class="btn btn-outline-custom">
+
+                View My Projects
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</section>
+
+{% endblock body %}

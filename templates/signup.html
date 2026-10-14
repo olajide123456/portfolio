@@ -1,0 +1,1282 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Jesse Portfolio Admin Registration">
+
+    <title>Admin Registration | Jesse Portfolio</title>
+
+<!-- =====================================================
+     BOOTSTRAP 5
+====================================================== -->
+<link href="{% static 'css/bootstrap.min.css'%}"
+      rel="stylesheet">
+<!-- =====================================================
+     BOOTSTRAP ICONS
+====================================================== -->
+<link rel="stylesheet"
+      href="{% static 'bootstrap-icons/font/bootstrap-icons.min.css'%}">
+
+    <!-- =====================================================
+         GOOGLE FONTS
+    ====================================================== -->
+
+    <!-- ==========================================
+         GOOGLE FONTS
+    =========================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+
+    <style>
+
+        /* ==========================================
+           VARIABLES
+        =========================================== */
+
+        :root {
+
+            --primary: #6c63ff;
+
+            --primary-dark: #5148e5;
+
+            --dark: #0b0f19;
+
+            --dark-2: #111827;
+
+            --text: #64748b;
+
+            --light: #f8fafc;
+
+            --border: #e2e8f0;
+
+            --sidebar-width: 270px;
+
+        }
+
+
+        /* ==========================================
+           GLOBAL
+        =========================================== */
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+        body {
+
+            font-family: 'Inter', sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f8fafc,
+                    #eef2ff
+                );
+
+            color: #1e293b;
+
+            min-height: 100vh;
+
+        }
+
+
+        a {
+
+            text-decoration: none;
+
+        }
+
+
+        /* ==========================================
+           PAGE WRAPPER
+        =========================================== */
+
+        .register-page {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 40px 20px;
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+
+        /* ==========================================
+           BACKGROUND DECORATION
+        =========================================== */
+
+        .register-page::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 500px;
+
+            height: 500px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(108, 99, 255, .12);
+
+            top: -200px;
+
+            right: -150px;
+
+        }
+
+
+        .register-page::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 400px;
+
+            height: 400px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(108, 99, 255, .08);
+
+            bottom: -200px;
+
+            left: -150px;
+
+        }
+
+
+        /* ==========================================
+           REGISTER CONTAINER
+        =========================================== */
+
+        .register-container {
+
+            width: 100%;
+
+            max-width: 1100px;
+
+            background: white;
+
+            border-radius: 22px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 25px 80px
+                rgba(15, 23, 42, .12);
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1.2fr;
+
+            position: relative;
+
+            z-index: 2;
+
+        }
+
+
+        /* ==========================================
+           LEFT SIDE
+        =========================================== */
+
+        .register-info {
+
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(108,99,255,.25),
+                    transparent 40%
+                ),
+                var(--dark);
+
+            padding: 70px 55px;
+
+            color: white;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+
+        .register-info::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 250px;
+
+            height: 250px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(255,255,255,.08);
+
+            bottom: -120px;
+
+            right: -120px;
+
+        }
+
+
+        /* ==========================================
+           LOGO
+        =========================================== */
+
+        .brand-logo {
+
+            font-family:
+                'JetBrains Mono',
+                monospace;
+
+            font-size: 1.7rem;
+
+            font-weight: 700;
+
+            margin-bottom: 70px;
+
+        }
+
+
+        .brand-logo span {
+
+            color: var(--primary);
+
+        }
+
+
+        /* ==========================================
+           REGISTER INFO
+        =========================================== */
+
+        .register-info h1 {
+
+            font-size: 2.8rem;
+
+            font-weight: 800;
+
+            line-height: 1.2;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .register-info h1 span {
+
+            color: var(--primary);
+
+        }
+
+
+        .register-info p {
+
+            color: #94a3b8;
+
+            line-height: 1.9;
+
+            font-size: .9rem;
+
+            max-width: 400px;
+
+        }
+
+
+        /* ==========================================
+           FEATURES
+        =========================================== */
+
+        .register-features {
+
+            list-style: none;
+
+            padding: 0;
+
+            margin-top: 40px;
+
+        }
+
+
+        .register-features li {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            color: #cbd5e1;
+
+            font-size: .85rem;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .register-features i {
+
+            width: 35px;
+
+            height: 35px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 8px;
+
+            background:
+                rgba(108,99,255,.15);
+
+            color: var(--primary);
+
+        }
+
+
+        /* ==========================================
+           RIGHT SIDE
+        =========================================== */
+
+        .register-form-wrapper {
+
+            padding: 60px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+        }
+
+
+        /* ==========================================
+           FORM HEADER
+        =========================================== */
+
+        .form-header {
+
+            margin-bottom: 35px;
+
+        }
+
+
+        .form-header h2 {
+
+            font-size: 2rem;
+
+            font-weight: 800;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .form-header p {
+
+            color: var(--text);
+
+            font-size: .9rem;
+
+            margin: 0;
+
+        }
+
+
+        /* ==========================================
+           FORM LABEL
+        =========================================== */
+
+        .form-label {
+
+            font-size: .8rem;
+
+            font-weight: 600;
+
+            color: #334155;
+
+            margin-bottom: 9px;
+
+        }
+
+
+        /* ==========================================
+           INPUT GROUP
+        =========================================== */
+
+        .input-wrapper {
+
+            position: relative;
+
+            margin-bottom: 22px;
+
+        }
+
+
+        .input-wrapper i.input-icon {
+
+            position: absolute;
+
+            left: 16px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            color: #94a3b8;
+
+            z-index: 5;
+
+        }
+
+
+        .form-control {
+
+            height: 52px;
+
+            padding-left: 48px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 9px;
+
+            font-size: .85rem;
+
+            transition: .3s;
+
+        }
+
+
+        .form-control:focus {
+
+            border-color:
+                var(--primary);
+
+            box-shadow:
+                0 0 0 4px
+                rgba(108,99,255,.1);
+
+        }
+
+
+        /* ==========================================
+           PASSWORD TOGGLE
+        =========================================== */
+
+        .password-toggle {
+
+            position: absolute;
+
+            right: 16px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            background: none;
+
+            border: none;
+
+            color: #94a3b8;
+
+            cursor: pointer;
+
+            z-index: 10;
+
+        }
+
+
+        /* ==========================================
+           CHECKBOX
+        =========================================== */
+
+        .form-check {
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .form-check-label {
+
+            font-size: .8rem;
+
+            color: var(--text);
+
+        }
+
+
+        .form-check-label a {
+
+            color: var(--primary);
+
+            font-weight: 600;
+
+        }
+
+
+        .form-check-input {
+
+            cursor: pointer;
+
+        }
+
+
+        .form-check-input:checked {
+
+            background-color:
+                var(--primary);
+
+            border-color:
+                var(--primary);
+
+        }
+
+
+        /* ==========================================
+           REGISTER BUTTON
+        =========================================== */
+
+        .register-btn {
+
+            width: 100%;
+
+            height: 54px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background:
+                var(--primary);
+
+            color: white;
+
+            font-size: .9rem;
+
+            font-weight: 600;
+
+            transition: .3s;
+
+        }
+
+
+        .register-btn:hover {
+
+            background:
+                var(--primary-dark);
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(108,99,255,.25);
+
+        }
+
+
+        /* ==========================================
+           LOGIN LINK
+        =========================================== */
+
+        .login-link {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            font-size: .85rem;
+
+            color: var(--text);
+
+        }
+
+
+        .login-link a {
+
+            color: var(--primary);
+
+            font-weight: 600;
+
+        }
+
+
+        /* ==========================================
+           BACK HOME
+        =========================================== */
+
+        .back-home {
+
+            position: absolute;
+
+            top: 30px;
+
+            right: 40px;
+
+            color: #64748b;
+
+            font-size: .8rem;
+
+            font-weight: 500;
+
+            z-index: 10;
+
+        }
+
+
+        .back-home:hover {
+
+            color: var(--primary);
+
+        }
+
+
+        /* ==========================================
+           RESPONSIVE
+        =========================================== */
+
+        @media (max-width: 992px) {
+
+            .register-container {
+
+                grid-template-columns:
+                    1fr;
+
+                max-width: 600px;
+
+            }
+
+
+            .register-info {
+
+                padding: 50px;
+
+            }
+
+
+            .brand-logo {
+
+                margin-bottom: 40px;
+
+            }
+
+
+            .register-info h1 {
+
+                font-size: 2.2rem;
+
+            }
+
+
+        }
+
+
+        @media (max-width: 576px) {
+
+            .register-page {
+
+                padding: 20px 15px;
+
+            }
+
+
+            .register-info {
+
+                padding: 40px 30px;
+
+            }
+
+
+            .register-form-wrapper {
+
+                padding: 40px 25px;
+
+            }
+
+
+            .register-info h1 {
+
+                font-size: 2rem;
+
+            }
+
+
+            .form-header h2 {
+
+                font-size: 1.7rem;
+
+            }
+
+
+            .back-home {
+
+                top: 15px;
+
+                right: 20px;
+
+            }
+
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================
+     REGISTER PAGE
+========================================== -->
+
+<section class="register-page">
+
+
+    <!-- ==========================================
+         BACK HOME
+    =========================================== -->
+
+    <a href="index.html"
+       class="back-home">
+
+        <i class="bi bi-arrow-left"></i>
+
+        Back to Website
+
+    </a>
+
+
+    <!-- ==========================================
+         REGISTER CONTAINER
+    =========================================== -->
+
+    <div class="register-container">
+
+
+        <!-- ==========================================
+             LEFT SIDE
+        =========================================== -->
+
+        <div class="register-info">
+
+
+            <!-- LOGO -->
+
+            <a href="index.html"
+               class="brand-logo text-white">
+
+                <span>&lt;</span>Jesse<span>/&gt;</span>
+
+            </a>
+
+
+            <!-- CONTENT -->
+
+            <h1>
+
+                Join the
+                <span>Admin Panel.</span>
+
+            </h1>
+
+
+            <p>
+
+                Create an administrator account to manage
+                your portfolio, projects, skills, services
+                and messages from one central dashboard.
+
+            </p>
+
+
+            <!-- FEATURES -->
+
+            <ul class="register-features">
+
+
+                <li>
+
+                    <i class="bi bi-grid-1x2"></i>
+
+                    Manage your portfolio content
+
+                </li>
+
+
+                <li>
+
+                    <i class="bi bi-folder"></i>
+
+                    Add and manage projects
+
+                </li>
+
+
+                <li>
+
+                    <i class="bi bi-code-slash"></i>
+
+                    Update your skills and services
+
+                </li>
+
+
+                <li>
+
+                    <i class="bi bi-envelope"></i>
+
+                    Manage client messages
+
+                </li>
+
+
+            </ul>
+
+
+        </div>
+
+
+
+        <!-- ==========================================
+             RIGHT SIDE
+        =========================================== -->
+
+        <div class="register-form-wrapper">
+
+
+            <!-- FORM HEADER -->
+
+            <div class="form-header">
+
+
+                <h2>
+
+                    Create Account
+
+                </h2>
+
+
+                <p>
+
+                    Fill in your details to create your
+                    administrator account.
+
+                </p>
+
+
+            </div>
+
+
+            <!-- ==========================================
+                 REGISTRATION FORM
+            =========================================== -->
+
+            <form action="#" method="POST">
+                {% for message in messages %}
+               <h4>{{message}}</h4>
+                 {% endfor %}
+                 {% csrf_token %}
+
+                <!-- FULL NAME -->
+
+                <div class="input-wrapper">
+
+
+                    <label
+                        class="form-label">
+
+                        Full Name
+
+                    </label>
+
+
+                    <div class="position-relative">
+
+
+                        <i class="bi bi-person input-icon"></i>
+
+
+                        <input
+                            type="text" name="fullname"
+                            class="form-control"
+                            placeholder="Enter your full name"
+                            required>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- USERNAME -->
+
+                <div class="input-wrapper">
+
+
+                    <label
+                        class="form-label">
+
+                        Username
+
+                    </label>
+
+
+                    <div class="position-relative">
+
+
+                        <i class="bi bi-person-badge input-icon"></i>
+
+
+                        <input
+                            type="text"
+                            class="form-control" name="username"
+                            placeholder="Choose a username"
+                            required>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- EMAIL -->
+
+                <div class="input-wrapper">
+
+
+                    <label
+                        class="form-label">
+
+                        Email Address
+
+                    </label>
+
+
+                    <div class="position-relative">
+
+
+                        <i class="bi bi-envelope input-icon"></i>
+
+
+                        <input
+                            type="email"
+                            class="form-control" name="email"
+                            placeholder="Enter your email address"
+                            required>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="input-wrapper">
+
+
+                    <label
+                        class="form-label">
+
+                        Password
+
+                    </label>
+
+
+                    <div class="position-relative">
+
+
+                        <i class="bi bi-lock input-icon"></i>
+
+
+                        <input
+                            type="password" name="password"
+                            class="form-control"
+                            id="password"
+                            placeholder="Create a strong password"
+                            required>
+                    </div>
+
+
+                </div>
+                <!-- CONFIRM PASSWORD -->
+                <div class="input-wrapper">
+                    <label
+                        class="form-label">
+                        Confirm Password
+                    </label>
+
+                    <div class="position-relative">
+                        <i class="bi bi-shield-lock input-icon"></i>
+                        <input
+                            type="password" name="cpassword"
+                            class="form-control"
+                            id="confirmPassword"
+                            placeholder="Confirm your password"
+                            required>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- TERMS -->
+
+                <div class="form-check">
+
+
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="terms"
+                        required>
+
+
+                    <label
+                        class="form-check-label"
+                        for="terms">
+
+                        I agree to the
+
+                        <a href="#">
+
+                            Terms & Conditions
+
+                        </a>
+
+                        and
+
+                        <a href="#">
+
+                            Privacy Policy
+
+                        </a>
+
+                    </label>
+
+
+                </div>
+
+
+
+                <!-- REGISTER BUTTON -->
+
+                <button
+                    type="submit"
+                    class="register-btn">
+
+                    Create Admin Account
+
+                    <i class="bi bi-arrow-right ms-2"></i>
+
+                </button>
+
+
+            </form>
+
+
+
+            <!-- LOGIN LINK -->
+
+            <div class="login-link">
+
+
+                Already have an account?
+
+                <a href="/login">
+
+                    Sign In
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ==========================================
+     JAVASCRIPT
+========================================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<script>
+
+    /* ==========================================
+       SHOW / HIDE PASSWORD
+    =========================================== */
+
+    function togglePassword(
+        inputId,
+        button
+    ) {
+
+        const input =
+            document.getElementById(inputId);
+
+        const icon =
+            button.querySelector("i");
+
+
+        if (
+            input.type === "password"
+        ) {
+
+            input.type = "text";
+
+            icon.classList.remove(
+                "bi-eye"
+            );
+
+            icon.classList.add(
+                "bi-eye-slash"
+            );
+
+        }
+
+        else {
+
+            input.type = "password";
+
+            icon.classList.remove(
+                "bi-eye-slash"
+            );
+
+            icon.classList.add(
+                "bi-eye"
+            );
+
+        }
+
+    }
+
+
+    /* ==========================================
+       PASSWORD VALIDATION
+    =========================================== */
+
+    document
+        .querySelector("form")
+        .addEventListener(
+            "submit",
+            function (event) {
+
+
+                const password =
+                    document.getElementById(
+                        "password"
+                    );
+
+
+                const confirmPassword =
+                    document.getElementById(
+                        "confirmPassword"
+                    );
+
+
+                if (
+                    password.value !==
+                    confirmPassword.value
+                ) {
+
+                    event.preventDefault();
+
+
+                    alert(
+                        "Passwords do not match!"
+                    );
+
+                }
+
+
+            }
+        );
+
+</script>
+
+
+</body>
+
+</html>
+```

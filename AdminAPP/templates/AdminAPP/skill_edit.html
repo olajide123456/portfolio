@@ -1,0 +1,435 @@
+{% extends 'AdminAPP/basic.html' %}
+{% load static %}
+
+{% block title %}Edit Skill | Jesse Admin{% endblock title %}
+
+{% block body %}
+
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+<div class="skill-edit-page">
+
+    <div class="container">
+
+        <!-- =========================
+             BREADCRUMB
+        ========================== -->
+        <div class="breadcrumb-area">
+
+            <a href="/add/dashboard/">
+                <i class="bi bi-house"></i>
+                Dashboard
+            </a>
+
+            <i class="bi bi-chevron-right"></i>
+
+            <a href="#">
+                Skills
+            </a>
+
+            <i class="bi bi-chevron-right"></i>
+
+            <span>Edit Skill</span>
+
+        </div>
+
+
+        <!-- =========================
+             PAGE HEADER
+        ========================== -->
+        <div class="page-heading">
+
+            <div>
+                <h1>Edit Skill</h1>
+
+                <p>
+                    Update the information for this skill.
+                </p>
+            </div>
+
+
+            <a href="{% url 'AdminAPP:skills' %}"
+               class="back-btn">
+
+                <i class="bi bi-arrow-left"></i>
+
+                Back to Skills
+
+            </a>
+
+        </div>
+
+
+        <!-- =========================
+             MAIN FORM
+        ========================== -->
+        <div class="skill-edit-layout">
+
+
+            <!-- =========================
+                 LEFT FORM SECTION
+            ========================== -->
+            <div class="form-column">
+
+       <form method="POST">
+    {% csrf_token %}
+
+    <div class="edit-card">
+
+        <div class="card-header">
+            <div>
+                <h3>Skill Information</h3>
+                <p>Update your professional skill details.</p>
+            </div>
+
+            <div class="card-icon">
+                <i class="bi bi-code-slash"></i>
+            </div>
+        </div>
+
+        <div class="card-body">
+
+            {% for field in form %}
+
+                <div class="form-group-custom">
+
+                    <label for="{{ field.id_for_label }}">
+                        {{ field.label }}
+
+                        {% if field.field.required %}
+                            <span class="required-star">*</span>
+                        {% endif %}
+                    </label>
+
+                    {{ field }}   <!-- this where the input field will be rendered -->
+
+                    {% if field.help_text %}
+                        <small class="field-help">
+                            {{ field.help_text }}
+                        </small>
+                    {% endif %}
+
+                    {% if field.errors %}
+                        <div class="field-error">
+                            {% for error in field.errors %}
+                                <div>{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    {% if field.help_text %}
+                        <small class="field-help">
+                            {{ field.help_text }}
+                        </small>
+                    {% endif %}
+
+                    {% if field.errors %}
+                        <div class="field-error">
+                            {% for error in field.errors %}
+                                <div>{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    <div class="form-actions">
+
+        <a href="{% url 'AdminAPP:skills' %}" class="cancel-btn">
+            <i class="bi bi-x-lg"></i>
+            Cancel
+        </a>
+
+        <button type="submit" class="save-btn">
+            <i class="bi bi-check-lg"></i>
+            Update Skill
+        </button>
+
+    </div>
+
+</form>
+
+            </div>
+
+
+            <!-- =========================
+                 RIGHT SIDEBAR
+            ========================== -->
+            <div class="sidebar-column">
+
+
+                <!-- CURRENT SKILL -->
+                <div class="sidebar-card">
+
+                    <div class="sidebar-card-header">
+
+                        <div>
+
+                            <h3>
+                                Current Skill
+                            </h3>
+
+                            <p>
+                                Skill preview
+                            </p>
+
+                        </div>
+
+
+                        <div class="sidebar-icon">
+
+                            <i class="bi bi-eye"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="sidebar-card-body">
+
+
+                        <div class="skill-preview">
+
+                            <div class="preview-icon">
+
+                                <i class="bi bi-code-slash"></i>
+
+                            </div>
+
+
+                            <h4 id="previewName">
+
+                                {{ skill.name|default:"Skill Name" }}
+
+                            </h4>
+
+
+                            <span id="previewCategory">
+
+                                {{ skill.category|default:"Uncategorized" }}
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="preview-progress-info">
+
+                            <div>
+
+                                <span>
+                                    Proficiency
+                                </span>
+
+                                <strong id="previewPercentage" class="text-primary">
+
+                                    {{skill.proficiency|default:"0" }}%
+
+                                </strong>
+
+                            </div>
+
+
+                            <div class="progress-bar">
+
+                                <div
+                                    class="progress-fill bg-primary"
+                                    id="progressFill"
+                                    style="width: {{skill.proficiency|default:'0' }}%;"
+                                 ></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- INFORMATION -->
+                <div class="sidebar-card">
+
+                    <div class="sidebar-card-header">
+
+                        <div>
+
+                            <h3>
+                                Skill Information
+                            </h3>
+
+                            <p>
+                                Additional details
+                            </p>
+
+                        </div>
+
+
+                        <div class="sidebar-icon">
+
+                            <i class="bi bi-info-circle"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="sidebar-card-body">
+
+
+                        <div class="information-row">
+
+                            <span>
+                                <i class="bi bi-folder"></i>
+
+                                Category
+                            </span>
+
+
+                            <strong>
+
+                                {{ skill.category|default:"Not specified" }}
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="information-row">
+
+                            <span>
+                                <i class="bi bi-bar-chart"></i>
+
+                                Level
+                            </span>
+
+
+                            <strong>
+
+                                {{skill.proficiency|default:"0" }}%
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="information-row">
+
+                            <span>
+                                <i class="bi bi-circle-fill"></i>
+
+                                Status
+                            </span>
+
+
+                            <strong class="status-value">
+
+                                {{ skill.status }}
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- HELP -->
+                <div class="help-card">
+
+                    <div class="help-icon">
+
+                        <i class="bi bi-lightbulb"></i>
+
+                    </div>
+
+
+                    <h4>
+                        Quick Tip
+                    </h4>
+
+
+                    <p>
+                        Keep your skill percentage realistic to accurately represent your experience.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const percentageInput = document.getElementById("percentage");
+
+    const percentageValue =
+        document.getElementById("percentageValue");
+
+    const previewPercentage =
+        document.getElementById("previewPercentage");
+
+    const progressFill =
+        document.getElementById("progressFill");
+
+    const skillName =
+        document.getElementById("skillName");
+
+    const previewName =
+        document.getElementById("previewName");
+
+    const category =
+        document.getElementById("category");
+
+    const previewCategory =
+        document.getElementById("previewCategory");
+
+
+    percentageInput.addEventListener("input", function () {
+
+        const value = this.value;
+
+        percentageValue.textContent = value + "%";
+
+        previewPercentage.textContent = value + "%";
+
+        progressFill.style.width = value + "%";
+
+    });
+
+
+    skillName.addEventListener("input", function () {
+
+        previewName.textContent =
+            this.value || "Skill Name";
+
+    });
+
+
+    category.addEventListener("input", function () {
+
+        previewCategory.textContent =
+            this.value || "Uncategorized";
+
+    });
+
+});
+
+</script>
+
+{% endblock body %}

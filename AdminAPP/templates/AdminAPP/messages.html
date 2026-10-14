@@ -1,0 +1,442 @@
+{% extends "AdminAPP/basic.html" %}
+{% load static %}
+{% block title %}
+Messages | Jesse Admin
+{% endblock title %}
+
+{% block body %}
+
+<div class="content">
+
+
+<!-- =========================================
+     PAGE HEADER
+========================================== -->
+
+<div class="content-header">
+
+    <div>
+
+        <h1>Messages</h1>
+
+        <p>
+            View and manage messages sent through
+            your portfolio contact form.
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================
+     STATISTICS
+========================================== -->
+
+<div class="row g-4 mb-4">
+
+
+    <!-- TOTAL MESSAGES -->
+
+    <div class="col-6 col-lg-3">
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div>
+
+                    <div class="stat-number">
+                        24
+                    </div>
+
+                    <div class="stat-label">
+                        Total Messages
+                    </div>
+
+                </div>
+
+
+                <div class="stat-icon">
+
+                    <i class="bi bi-envelope"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- UNREAD MESSAGES -->
+
+    <div class="col-6 col-lg-3">
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div>
+
+                    <div class="stat-number">
+                        5
+                    </div>
+
+                    <div class="stat-label">
+                        Unread Messages
+                    </div>
+
+                </div>
+
+
+                <div class="stat-icon">
+
+                    <i class="bi bi-envelope-exclamation"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- READ MESSAGES -->
+
+    <div class="col-6 col-lg-3">
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div>
+
+                    <div class="stat-number">
+                        19
+                    </div>
+
+                    <div class="stat-label">
+                        Read Messages
+                    </div>
+
+                </div>
+
+
+                <div class="stat-icon">
+
+                    <i class="bi bi-envelope-open"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- THIS MONTH -->
+
+    <div class="col-6 col-lg-3">
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div>
+
+                    <div class="stat-number">
+                        8
+                    </div>
+
+                    <div class="stat-label">
+                        This Month
+                    </div>
+
+                </div>
+
+
+                <div class="stat-icon">
+
+                    <i class="bi bi-calendar3"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================================
+     MESSAGE LIST
+========================================== -->
+
+<div class="messages-card">
+
+
+    <!-- MESSAGE HEADER -->
+
+    <div class="messages-header">
+
+
+        <h3>
+            All Messages
+        
+
+
+    </div>
+
+
+
+    <!-- =========================================
+         MESSAGE TABLE
+    ========================================== -->
+
+    <div class="table-responsive">
+
+
+        <table class="table">
+
+ 
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Sender
+                    </th>
+
+                    <th>
+                        Subject
+                    </th>
+
+                    <th>
+                        Date
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                    <th class="text-end">
+                        Actions
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+{% for message in newcontact %}
+            <tbody>
+
+
+                <!-- MESSAGE 01 -->
+
+                <tr>
+
+                    <td>
+
+                        <div class="sender">
+
+                            <div class="sender-avatar">
+                
+                              {{ message.name|first|upper }}
+                              </div>
+
+                            <div class="sender-info">
+
+                                <strong>
+                                   {{message.name}}
+                                </strong>
+
+                                <span>
+                                   {{ message.email}}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </td>
+
+
+
+                    <td>
+
+                        <div class="message-subject">
+
+                           {{message.subject}}
+
+                        </div>
+
+
+                        <span class="message-preview">
+
+                            {{message.message}}
+                        </span>
+
+                    </td>
+
+
+
+                    <td>
+                        {{ message.created_at|date:"M d, Y" }}
+                    </td>
+
+
+
+                    <td>
+        {% if message.is_read %}
+            <span class="status-badge read">
+                <i class="bi bi-check-circle"></i>
+                Read
+            </span>
+        {% else %}
+            <span class="status-badge unread">
+                <i class="bi bi-envelope"></i>
+                Unread
+            </span>
+        {% endif %}
+    </td>
+
+
+                    <td>
+
+                        <div class="action-buttons justify-content-end">
+
+
+                            <a href="{% url 'AdminAPP:view_message' message.pk %}"
+                               class="action-btn"
+                               title="View">
+
+                                <i class="bi bi-eye"></i>
+
+                            </a>
+
+
+                            <a href="{% url 'AdminAPP:mark_message_read' message.pk %}"
+                               class="action-btn"d
+                               title="Mark as Read">
+
+                                <i class="bi bi-envelope-open"></i>
+
+                            </a>
+
+
+                            <a href="{% url 'AdminAPP:message_del' message.pk %}"
+                               class="action-btn delete"
+                               title="Delete">
+
+                                <i class="bi bi-trash"></i>
+
+                            </a>
+
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+
+              
+            </tbody>
+{% endfor %}
+
+        </table>
+
+
+    </div>
+
+
+
+    <!-- =========================================
+         PAGINATION DESIGN
+    ========================================== -->
+
+    <div class="pagination-wrapper">
+
+
+        <div class="pagination-info">
+
+            Showing 1 to 5 of 24 messages
+
+        </div>
+
+
+<!-- Pagination -->
+        <nav>
+            <ul class="pagination pagination-sm">
+
+                <!-- Previous -->
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                            &laquo; Previous
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">&laquo; Previous</span>
+                    </li>
+                {% endif %}
+
+                <!-- Page Numbers -->
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <li class="page-item active">
+                            <span class="page-link">{{ num }}</span>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                <!-- Next -->
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                            Next &raquo;
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">Next &raquo;</span>
+                    </li>
+                {% endif %}
+
+            </ul>
+        </nav>
+
+        <p class="text-center text-muted small">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            &mdash; {{ page_obj.paginator.count }} Total message: 
+        </p>
+
+
+    </div>
+
+
+</div>
+
+
+</div>
+
+{% endblock body%}

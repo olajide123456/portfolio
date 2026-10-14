@@ -1,0 +1,470 @@
+{% extends 'AdminAPP/basic.html' %}
+{% load static %}
+
+{% block title %}Edit Experience | Jesse Admin{% endblock title %}
+
+
+{% block body %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+<div class="experience-edit-page">
+
+    <div class="container">
+
+
+        <!-- =========================
+             BREADCRUMB
+        ========================== -->
+        <div class="breadcrumb-area">
+
+            <a href="/add/dashboard/">
+                <i class="bi bi-house"></i>
+                Dashboard
+            </a>
+
+            <i class="bi bi-chevron-right"></i>
+
+            <a href="#">
+                Experience
+            </a>
+
+            <i class="bi bi-chevron-right"></i>
+
+            <span>Edit Experience</span>
+
+        </div>
+
+
+        <!-- =========================
+             PAGE HEADING
+        ========================== -->
+        <div class="page-heading">
+
+            <div>
+
+                <h1>Edit Experience</h1>
+
+                <p>
+                    Update your professional work experience information.
+                </p>
+
+            </div>
+
+
+            <div class="heading-actions">
+
+                <a href="javascript:history.back()"
+                   class="normal-btn secondary-btn">
+
+                    <i class="bi bi-arrow-left"></i>
+
+                    Back
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             MAIN LAYOUT
+        ========================== -->
+        <div class="experience-edit-layout">
+
+
+            <!-- =========================
+                 FORM COLUMN
+            ========================== -->
+            <div class="experience-form-column">
+
+                <form method="POST" class="experience-edit-form" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <!-- =========================
+                         EXPERIENCE DETAILS
+                    ========================== -->
+                    <div class="edit-card">
+                        <div class="edit-card-header">
+
+                            <div class="edit-card-title">
+
+                                <div class="card-title-icon">
+
+                                    <i class="bi bi-briefcase"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <h3>
+                                        Experience Details
+                                    </h3>
+
+                                    <p>
+                                        Update your job and company information.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="edit-card-body">
+
+
+                            <!-- FORM FIELDS -->
+
+                            {% for field in form %}
+
+                                <div class="form-group-custom">
+
+                                    <label for="{{ field.id_for_label }}">
+
+                                        {{ field.label }}
+
+                                        {% if field.field.required %}
+                                            <span class="required-star">*</span>
+                                        {% endif %}
+
+                                    </label>
+
+
+                                    {{ field }}
+
+
+                                    {% if field.help_text %}
+
+                                        <small class="field-help">
+
+                                            {{ field.help_text }}
+
+                                        </small>
+
+                                    {% endif %}
+
+
+                                    {% if field.errors %}
+
+                                        <div class="field-error">
+
+                                            {% for error in field.errors %}
+
+                                                {{ error }}
+
+                                            {% endfor %}
+
+                                        </div>
+
+                                    {% endif %}
+
+                                </div>
+
+                            {% endfor %}
+
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =========================
+                         FORM ACTIONS
+                    ========================== -->
+                    <div class="form-actions-card">
+
+                        <div class="form-actions-left">
+
+                            <a href="javascript:history.back()"
+                               class="cancel-btn">
+
+                                <i class="bi bi-x-lg"></i>
+
+                                Cancel
+
+                            </a>
+
+                        </div>
+
+
+                        <div class="form-actions-right">
+
+                            <button type="submit"
+                                    class="save-btn">
+
+                                <i class="bi bi-check-lg"></i>
+
+                                Save Changes
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                </form>
+
+            </div>
+
+
+            <!-- =========================
+                 SIDEBAR
+            ========================== -->
+            <div class="experience-sidebar-column">
+
+
+                <!-- EDIT INFORMATION -->
+                <div class="sidebar-card">
+
+                    <div class="sidebar-card-header">
+
+                        <div>
+
+                            <h3>
+                                Edit Information
+                            </h3>
+
+                            <p>
+                                Manage your experience
+                            </p>
+
+                        </div>
+
+
+                        <div class="header-icon">
+
+                            <i class="bi bi-info-circle"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="sidebar-card-body">
+
+                        <div class="edit-info-list">
+
+
+                            <div class="edit-info-item">
+
+                                <div class="edit-info-icon">
+
+                                    <i class="bi bi-pencil-square"></i>
+
+                                </div>
+
+
+                                <div>
+
+                                    <strong>
+                                        Update Details
+                                    </strong>
+
+                                    <span>
+                                        Modify your professional experience.
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="edit-info-item">
+
+                                <div class="edit-info-icon">
+
+                                    <i class="bi bi-check-circle"></i>
+
+                                </div>
+
+
+                                <div>
+
+                                    <strong>
+                                        Save Changes
+                                    </strong>
+
+                                    <span>
+                                        Make sure all information is correct.
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="edit-info-item">
+
+                                <div class="edit-info-icon">
+
+                                    <i class="bi bi-eye"></i>
+
+                                </div>
+
+
+                                <div>
+
+                                    <strong>
+                                        Review Information
+                                    </strong>
+
+                                    <span>
+                                        Check your experience before saving.
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- HELP CARD -->
+                <div class="sidebar-card">
+
+                    <div class="sidebar-card-header">
+
+                        <div>
+
+                            <h3>
+                                Quick Tip
+                            </h3>
+
+                            <p>
+                                Keep your portfolio professional
+                            </p>
+
+                        </div>
+
+
+                        <div class="header-icon">
+
+                            <i class="bi bi-lightbulb"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="sidebar-card-body">
+
+                        <div class="experience-tip">
+
+                            <p>
+
+                                <i class="bi bi-check2-circle"></i>
+
+                                Use clear and professional job titles.
+
+                            </p>
+
+
+                            <p>
+
+                                <i class="bi bi-check2-circle"></i>
+
+                                Include your important responsibilities.
+
+                            </p>
+
+
+                            <p>
+
+                                <i class="bi bi-check2-circle"></i>
+
+                                Keep dates and company information accurate.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DANGER ZONE -->
+                <div class="danger-card">
+
+                    <div class="danger-header">
+
+                        <div class="danger-icon">
+
+                            <i class="bi bi-exclamation-triangle"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Danger Zone
+                            </h3>
+
+                            <p>
+                                Irreversible actions
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="danger-body">
+
+                        <p>
+
+                            Be careful when making changes to your
+                            professional experience information.
+
+                        </p>
+
+                     <a href="{% url 'AdminAPP:experience_del' experience.pk %}">
+                        <button type="button"
+                                class="delete-btn"
+                                >
+                            <i class="bi bi-x-circle"></i>
+
+                            Discard Changes
+                        </button>
+                    </a>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function confirmCancel() {
+
+    const confirmed = confirm(
+        "Are you sure you want to discard your changes?"
+    );
+
+    if (confirmed) {
+
+        window.history.back();
+
+    }
+
+}
+
+</script>
+
+{% endblock body %}

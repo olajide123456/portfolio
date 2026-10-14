@@ -1,0 +1,421 @@
+{% extends 'AdminAPP/basic.html' %}
+{% load static %}
+{% block title %}Projects | Admin Dashboard{% endblock title %}
+
+
+
+
+
+{% block body %}
+
+<div class="content">
+
+
+    <!-- PAGE HEADER -->
+
+    <div class="content-header">
+
+        <div>
+
+            <h1>project</h1>
+
+            <p>Manage your portfolio projects.</p>
+
+        </div>
+
+
+        <a href="/add/add_projects/" class="btn-primary-custom">
+
+            <i class="bi bi-plus-lg"></i>
+
+            Add New Project
+
+        </a>
+
+    </div>
+
+
+
+    <!-- =================================================
+         STATISTICS
+    ================================================== -->
+
+    <div class="row g-4">
+
+
+        <div class="col-6 col-lg-3">
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-folder"></i>
+
+                    </div>
+
+                </div>
+
+                <h3>{{total}}</h3>
+
+                <p>Total Projects</p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="col-6 col-lg-3">
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-check-circle"></i>
+
+                    </div>
+
+                </div>
+
+                <h3>{{published_count}}</h3>
+
+                <p>Published</p>
+
+            </div>
+
+        </div>
+
+
+
+       
+
+
+        <div class="col-6 col-lg-3">
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-pencil"></i>
+
+                    </div>
+
+                </div>
+
+                <h3>{{draft}}</h3>
+
+                <p>Drafts</p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         PROJECT TABLE
+    ================================================== -->
+
+    <div class="projects-card">
+
+
+        <div class="projects-header">
+
+            <h3>All Projects</h3>
+
+        </div>
+
+
+
+        <div class="table-container">
+                {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill"></i>
+            {{ message }}
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert">
+            </button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>Project</th>
+
+                        <th>Category</th>
+
+                        <th>Technology</th>
+
+                        <th>Status</th>
+
+                        <th>Date</th>
+
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+                               
+                             {% for project in newproject %}
+
+                <tbody id="projectTable">
+
+
+                    <!-- PROJECT 1 -->
+
+                    <tr>
+
+                        <td>
+                         {{ forloop.counter }}
+                            <div class="project-info">
+
+                                <div class="project-image">
+
+                                    <i class="bi bi-globe"></i>
+
+                                </div>
+
+
+                                <div>
+                           
+                                    <div class="project-name">
+
+                                        {{ project.title }}
+
+                                    </div>
+
+                                    <div class="project-slug">
+
+                                        {{ project.title }}
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="category">
+
+                                {{ project.category }}
+
+                            </span>
+
+                        </td>
+
+
+                        <td>{{ project.technologies }}</td>
+
+
+                        <td>
+
+                            <span class="status status-featured">
+
+                                {{ project.status }}
+
+                            </span>
+
+                        </td>
+
+
+                        <td>{{ project.created_at }}</td>
+
+
+                        <td>
+
+                            <div class="actions">
+
+                                <a href="{% url 'AdminAPP:project_edit' project.pk %}"
+                                   class="action-btn"
+                                   title="Edit">
+
+                                    <i class="bi bi-pencil"></i>
+
+                                </a>
+
+
+                                <a href="{% url 'AdminAPP:project_detail' project.pk %}"
+                                   class="action-btn"
+                                   title="View">
+
+                                    <i class="bi bi-eye"></i>
+
+                                </a>
+
+
+                                <a href="{% url 'AdminAPP:project_del' project.pk %}"
+                                   class="action-btn action-delete"
+                                   title="Delete">
+
+                                    <i class="bi bi-trash"></i>
+
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+                      
+                    {% endfor %}
+
+
+                   
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+
+        <!-- PAGINATION -->
+
+        <div class="pagination-area">
+
+
+            <div class="pagination-info">
+
+                Showing 1–5 of 20 newprojectprojects
+
+            </div>
+  <!-- Pagination -->
+        <nav>
+            <ul class="pagination pagination-sm">
+
+                <!-- Previous -->
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                            &laquo; Previous
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">&laquo; Previous</span>
+                    </li>
+                {% endif %}
+
+                <!-- Page Numbers -->
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <li class="page-item active">
+                            <span class="page-link">{{ num }}</span>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                <!-- Next -->
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                            Next &raquo;
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">Next &raquo;</span>
+                    </li>
+                {% endif %}
+
+            </ul>
+        </nav>
+
+        <p class="text-center text-muted small">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            &mdash; {{ page_obj.paginator.count }} Total Projects: 
+        </p>
+
+
+
+           
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+{% endblock body %}
+
+
+
+{% block script %}
+
+<script>
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+
+    if (searchInput) {
+
+        searchInput.addEventListener(
+            "keyup",
+            function () {
+
+                let searchValue =
+                    this.value.toLowerCase();
+
+
+                let rows =
+                    document.querySelectorAll(
+                        "#projectTable tr"
+                    );
+
+
+                rows.forEach(function (row) {
+
+                    let text =
+                        row.textContent.toLowerCase();
+
+
+                    if (text.includes(searchValue)) {
+
+                        row.style.display = "";
+
+                    } else {
+
+                        row.style.display = "none";
+
+                    }
+
+                });
+
+            }
+        );
+
+    }
+
+</script>
+
+{% endblock script %}

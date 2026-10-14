@@ -1,0 +1,838 @@
+{% extends 'AdminAPP/basic.html' %}
+{% load static %}
+{% block title %}Add Project | Jesse Admin {% endblock title %}
+
+
+{% block body %}
+
+<div class="content">
+
+
+    <!-- =====================================================
+         BREADCRUMB
+    ===================================================== -->
+
+    <div class="custom-breadcrumb">
+
+        <a href="{% url 'AdminAPP:dashboard' %}">
+            Dashboard
+        </a>
+
+        <i class="bi bi-chevron-right"></i>
+
+        <a href="{% url 'AdminAPP:projects' %}">
+            Projects
+        </a>
+
+        <i class="bi bi-chevron-right"></i>
+
+        <span class="current">
+            Add Project
+        </span>
+
+    </div>
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ===================================================== -->
+
+    <div class="project-page-header">
+
+        <div>
+
+            <h4>
+                Add New Project
+            </h4>
+
+            <p>
+                Create and showcase a new project in your portfolio.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         DJANGO MESSAGES
+    ===================================================== -->
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+            <div class="django-message {{ message.tags }}">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+
+    <!-- =====================================================
+         PROJECT FORM
+    ===================================================== -->
+
+    <form
+        action=""
+        method="post"
+        enctype="multipart/form-data"
+        id="projectForm"
+    >
+
+        {% csrf_token %}
+
+
+        <div class="row g-4">
+
+
+            <!-- =================================================
+                 LEFT COLUMN
+            ================================================== -->
+
+            <div class="col-lg-8">
+
+
+                <!-- =================================================
+                     PROJECT INFORMATION
+                ================================================== -->
+
+                <div class="form-card">
+
+                    <h5 class="form-card-title">
+                        Project Information
+                    </h5>
+
+                    <p class="form-card-description">
+                        Enter the main details about your project.
+                    </p>
+
+
+                    <!-- PROJECT TITLE -->
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+                            Project Title
+                        </label>
+
+                        <input
+                            type="text"
+                            name="title"
+                            class="form-control"
+                            placeholder="Enter project title"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- PROJECT DESCRIPTION -->
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+                            Project Description
+                        </label>
+
+                        <textarea
+                            name="description"
+                            class="form-control"
+                            placeholder="Describe your project..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <!-- CATEGORY AND STATUS -->
+
+                    <div class="row g-3">
+
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                Project Category
+                            </label>
+
+                            <select
+                                name="category"
+                                class="form-select"
+                                required
+                            >
+
+                                <option
+                                    value=""
+                                    selected
+                                    disabled
+                                >
+                                    Select category
+                                </option>
+
+                                <option value="Web Development">
+                                    Web Development
+                                </option>
+
+                                <option value="Web Application">
+                                    Web Application
+                                </option>
+
+                                <option value="E-Commerce">
+                                    E-Commerce
+                                </option>
+
+                                <option value="Dashboard">
+                                    Dashboard
+                                </option>
+
+                                <option value="Personal Project">
+                                    Personal Project
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                Project Status
+                            </label>
+
+                            <select
+                                name="status"
+                                class="form-select"
+                                required
+                            >
+
+                                <option value="published">
+                                    Completed
+                                </option>
+
+                                <option value="draft">
+                                    Draft
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- TECHNOLOGIES -->
+
+<div class="form-card">
+
+    <h5 class="form-card-title">
+        Technologies Used
+    </h5>
+
+    <p class="form-card-description">
+        Type a technology and press Enter.
+    </p>
+
+    <div class="tech-container" id="techContainer">
+
+        <!-- Technology tags will appear here -->
+
+        <input
+            type="text"
+            id="techInput"
+            class="tech-input"
+            placeholder="Example: Django"
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <!-- THIS IS THE INPUT SENT TO DJANGO -->
+
+    <input
+        type="hidden"
+        name="technologies"
+        id="technologiesValue"
+        value=""
+    >
+
+</div>
+                <!-- =================================================
+                     PROJECT LINKS
+                ================================================== -->
+
+                <div class="form-card">
+
+                    <h5 class="form-card-title">
+                        Project Links
+                    </h5>
+
+                    <p class="form-card-description">
+                        Add links to your live project and source code.
+                    </p>
+
+
+                    <!-- LIVE DEMO -->
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+                            Live Demo URL
+                        </label>
+
+                        <input
+                            type="url"
+                            name="live_demo"
+                            class="form-control"
+                            placeholder="https://example.com"
+                        >
+
+                    </div>
+
+
+                    <!-- GITHUB -->
+
+                    <div>
+
+                        <label class="form-label">
+                            GitHub Repository URL
+                        </label>
+
+                        <input
+                            type="url"
+                            name="github_repo"
+                            class="form-control"
+                            placeholder="https://github.com/..."
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 RIGHT COLUMN
+            ================================================== -->
+
+            <div class="col-lg-4">
+
+
+                <!-- =================================================
+                     PROJECT IMAGE
+                ================================================== -->
+
+                <div class="form-card">
+
+                    <h5 class="form-card-title">
+                        Project Image
+                    </h5>
+
+                    <p class="form-card-description">
+                        Upload a featured image for your project.
+                    </p>
+
+
+                    <label
+                        for="projectImage"
+                        class="image-upload"
+                    >
+
+                        <div class="upload-icon">
+
+                            <i class="bi bi-cloud-arrow-up"></i>
+
+                        </div>
+
+
+                        <h6>
+                            Upload Project Image
+                        </h6>
+
+
+                        <p>
+                            PNG, JPG or WEBP
+                        </p>
+
+                    </label>
+
+
+                    <input
+                        type="file"
+                        name="image"
+                        id="projectImage"
+                        accept="image/*"
+                    >
+
+
+                    <!-- IMAGE PREVIEW -->
+
+                    <div
+                        class="image-preview"
+                        id="imagePreview"
+                    >
+
+                        <img
+                            id="previewImage"
+                            src=""
+                            alt="Project Preview"
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     PUBLISH SETTINGS
+                ================================================== -->
+
+                <div class="form-card">
+
+                    <h5 class="form-card-title">
+                        Publishing
+                    </h5>
+
+                    <p class="form-card-description">
+                        Control how your project appears on your portfolio.
+                    </p>
+
+
+                    <!-- FEATURED -->
+
+                    <div class="publish-option">
+
+                        <div class="form-check">
+
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                name="featured"
+                                id="featured"
+                            >
+
+                            <label
+                                class="form-check-label"
+                                for="featured"
+                            >
+
+                                Mark as Featured Project
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PUBLISH -->
+
+                    <div class="publish-option">
+
+                        <div class="form-check">
+
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                name="publish"
+                                id="publish"
+                                checked
+                            >
+
+                            <label
+                                class="form-check-label"
+                                for="publish"
+                            >
+
+                                Publish immediately
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =====================================================
+             FORM ACTIONS
+        ===================================================== -->
+
+        <div class="form-actions">
+
+            <button
+                type="button"
+                class="btn-cancel"
+                id="cancelButton"
+            >
+
+                Cancel
+
+            </button>
+
+
+            <button
+                type="submit"
+                class="btn-save"
+            >
+
+                <i class="bi bi-plus-lg me-2"></i>
+
+                Add Project
+
+            </button>
+
+        </div>
+
+
+    </form>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+    /* =====================================================
+       IMAGE PREVIEW
+    ===================================================== */
+
+    const projectImage =
+        document.getElementById("projectImage");
+
+    const imagePreview =
+        document.getElementById("imagePreview");
+
+    const previewImage =
+        document.getElementById("previewImage");
+
+
+    if (projectImage) {
+
+        projectImage.addEventListener(
+            "change",
+            function () {
+
+                const file =
+                    this.files[0];
+
+                if (file) {
+
+                    previewImage.src =
+                        URL.createObjectURL(file);
+
+                    imagePreview.style.display =
+                        "block";
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    /* =====================================================
+       TECHNOLOGY TAG SYSTEM
+    ===================================================== */
+
+    const techInput =
+        document.getElementById("techInput");
+
+    const techContainer =
+        document.getElementById("techContainer");
+
+    const technologiesValue =
+        document.getElementById("technologiesValue");
+
+
+    let technologies = [];
+
+
+
+    /* =====================================================
+       ADD TECHNOLOGY WITH ENTER
+    ===================================================== */
+
+    techInput.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Enter") {
+
+                event.preventDefault();
+
+                const technology =
+                    techInput.value.trim();
+
+
+                if (technology !== "") {
+
+                    addTechnology(
+                        technology
+                    );
+
+                    techInput.value = "";
+
+                    updateTechnologies();
+
+                }
+
+            }
+
+        }
+    );
+
+
+
+    /* =====================================================
+       ADD TECHNOLOGY
+    ===================================================== */
+
+    function addTechnology(technology) {
+
+
+        /*
+           Prevent duplicate technologies
+        */
+
+        if (
+            technologies.includes(technology)
+        ) {
+
+            return;
+
+        }
+
+
+        /*
+           Add technology to array
+        */
+
+        technologies.push(
+            technology
+        );
+
+
+        /*
+           Create tag
+        */
+
+        const tag =
+            document.createElement("div");
+
+        tag.className =
+            "tech-item";
+
+
+        tag.innerHTML = `
+
+            <span>
+                ${escapeHtml(technology)}
+            </span>
+
+            <button
+                type="button"
+                aria-label="Remove technology"
+            >
+
+                <i class="bi bi-x"></i>
+
+            </button>
+
+        `;
+
+
+        /*
+           Remove button
+        */
+
+        tag.querySelector("button")
+            .addEventListener(
+                "click",
+                function () {
+
+
+                    technologies =
+                        technologies.filter(
+                            item =>
+                                item !== technology
+                        );
+
+
+                    tag.remove();
+
+
+                    /*
+                       Update hidden input
+                    */
+
+                    updateTechnologies();
+
+                }
+            );
+
+
+        /*
+           Put tag before input
+        */
+
+        techContainer.insertBefore(
+            tag,
+            techInput
+        );
+
+
+        /*
+           IMPORTANT:
+           Update hidden input immediately
+        */
+
+        updateTechnologies();
+
+    }
+
+
+
+    /* =====================================================
+       UPDATE HIDDEN TECHNOLOGIES INPUT
+    ===================================================== */
+
+    function updateTechnologies() {
+
+
+        /*
+           DO NOT DO THIS:
+
+           techInput.value =
+               technologies.join(", ");
+
+           That would put the values back
+           into the typing input.
+
+           Instead, put them into the
+           hidden Django form field.
+        */
+
+
+        technologiesValue.value =
+            technologies.join(", ");
+
+
+        /*
+           Optional console check.
+
+           Open browser F12 -> Console
+           to see what will be submitted.
+        */
+
+        console.log(
+            "Technologies:",
+            technologiesValue.value
+        );
+
+    }
+
+
+
+    /* =====================================================
+       FORM SUBMIT
+    ===================================================== */
+
+    const projectForm =
+        document.getElementById("projectForm");
+
+
+    projectForm.addEventListener(
+        "submit",
+        function () {
+
+
+            /*
+               Make absolutely sure the hidden
+               input contains all technologies.
+            */
+
+            updateTechnologies();
+
+
+            console.log(
+                "Submitting technologies:",
+                technologiesValue.value
+            );
+
+        }
+    );
+
+
+
+    /* =====================================================
+       ESCAPE HTML
+    ===================================================== */
+
+    function escapeHtml(text) {
+
+        const div =
+            document.createElement("div");
+
+
+        div.textContent =
+            text;
+
+
+        return div.innerHTML;
+
+    }
+
+
+
+    /* =====================================================
+       CANCEL BUTTON
+    ===================================================== */
+
+    const cancelButton =
+        document.getElementById("cancelButton");
+
+
+    cancelButton.addEventListener(
+        "click",
+        function () {
+
+            window.location.href =
+                "{% url 'AdminAPP:projects' %}";
+
+        }
+    );
+
+
+</script>
+
+
+{% endblock body %}

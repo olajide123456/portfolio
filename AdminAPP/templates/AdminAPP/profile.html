@@ -1,0 +1,1016 @@
+{% extends 'AdminAPP/basic.html' %}
+{% load static %}
+{% block title %}Profile | Admin Dashboard{% endblock title %}
+
+{% block body %}
+
+<div class="content">
+
+    <!-- =========================================
+         PAGE HEADER
+    ========================================== -->
+
+    <div class="content-header">
+
+        <div>
+
+            <h1>
+                My Profile
+            </h1>
+
+            <p>
+                Manage your personal information and account.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         PROFILE HEADER
+    ========================================== -->
+
+    <div class="profile-header">
+
+        <div class="profile-header-content">
+
+
+            <!-- PROFILE AVATAR -->
+
+            <div class="profile-avatar rounded">
+
+                {% if signup.pic %}
+
+                    <img
+                        src="{{ signup.pic.url }}"
+                        alt="{{ signup.fullname }}"
+                    >
+
+                {% else %}
+
+                    {{ signup.fullname|first|upper }}
+
+                {% endif %}
+
+            </div>
+
+
+
+            <!-- PROFILE INFORMATION -->
+
+            <div class="profile-info">
+
+                <h2>
+                    {{ signup.fullname }}
+                </h2>
+
+
+                <div class="role">
+
+                    {{ signup.title }}
+
+                </div>
+
+
+                <p class="text-white">
+
+                    {{ signup.bio }}
+
+                </p>
+
+            </div>
+
+
+
+            <!-- STATUS -->
+
+            <div class="profile-status">
+
+                <span class="status-badge">
+
+                    <span class="status-dot"></span>
+
+                    Available for work
+
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================
+         PERSONAL INFORMATION
+    ========================================== -->
+
+    <div class="row g-4 mb-4">
+
+
+        <!-- PERSONAL DETAILS -->
+
+        <div class="col-lg-8">
+
+            <div class="card-custom">
+
+
+                <div class="card-header-custom">
+
+                    <h3>
+                        Personal Information
+                    </h3>
+
+                    <span>
+                        PROFILE DETAILS
+                    </span>
+
+                </div>
+
+
+
+                <form
+                    method="POST"
+                    enctype="multipart/form-data"
+                >
+
+                    {% csrf_token %}
+
+
+                    <div class="row g-3">
+
+
+                        <!-- FULL NAME -->
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+
+                                Full Name*
+
+                            </label>
+
+                            <input
+                                type="text"
+                                name="fullname"
+                                class="form-control"
+                                value="{{ signup.fullname }}"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <!-- USERNAME -->
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+
+                                User Name
+
+                            </label>
+
+                            <input
+                                type="text"
+                                name="username"
+                                class="form-control"
+                                value="{{ signup.username }}"
+                                placeholder="Enter username"
+                            >
+
+                        </div>
+
+
+
+                        <!-- EMAIL -->
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+
+                                Email Address
+
+                            </label>
+
+                            <input
+                                type="email"
+                                name="email"
+                                class="form-control"
+                                value="{{ signup.email }}"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <!-- PHONE -->
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+
+                                Phone Number
+
+                            </label>
+
+                            <input
+                                type="text"
+                                name="phone"
+                                value="{{ signup.phone }}"
+                                class="form-control"
+                                placeholder="+234 xxx xxx xxxx"
+                            >
+
+                        </div>
+
+
+
+                        <!-- TITLE -->
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+
+                                Professional Title
+
+                            </label>
+
+                            <input
+                                type="text"
+                                name="title"
+                                class="form-control"
+                                value="{{ signup.title }}"
+                            >
+
+                        </div>
+
+
+
+                        <!-- LOCATION -->
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+
+                                Location
+
+                            </label>
+
+                            <input
+                                type="text"
+                                name="location"
+                                class="form-control"
+                                value="{{ signup.location }}"
+                            >
+
+                        </div>
+
+
+
+                        <!-- BIO -->
+
+                        <div class="col-12">
+
+                            <label class="form-label">
+
+                                Professional Bio
+
+                            </label>
+
+                            <textarea
+                                name="bio"
+                                class="form-control"
+                                rows="5"
+                            >{{ signup.bio }}</textarea>
+
+                        </div>
+
+
+
+                        <!-- PROFILE IMAGE -->
+
+                        <div class="col-12">
+
+                            <label class="form-label">
+
+                                Profile Image
+
+                            </label>
+
+                            <input
+                                type="file"
+                                name="pic"
+                                class="form-control"
+                                accept="image/*"
+                            >
+
+                            {% if signup.pic %}
+
+                                <small class="text-muted">
+
+                                    Current image:
+                                    {{ signup.pic.name }}
+
+                                </small>
+
+                            {% endif %}
+
+                        </div>
+
+
+
+                        <!-- BUTTONS -->
+
+                        <div class="col-12 mt-4">
+
+                            <button
+                                type="submit"
+                                class="btn-primary-custom"
+                            >
+
+                                <i class="bi bi-check2 me-1"></i>
+
+                                Save Changes
+
+                            </button>
+
+
+                            <button
+                                type="reset"
+                                class="btn-light-custom ms-2"
+                            >
+
+                                Cancel
+
+                            </button>
+
+                        </div>
+
+
+                    </div>
+
+                </form>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================================
+             CONTACT INFORMATION
+        ========================================== -->
+
+        <div class="col-lg-4">
+
+            <div class="card-custom">
+
+
+                <div class="card-header-custom">
+
+                    <h3>
+                        Contact Information
+                    </h3>
+
+                </div>
+
+
+
+                <ul class="info-list">
+
+
+                    <!-- EMAIL -->
+
+                    <li>
+
+                        <div class="info-icon">
+
+                            <i class="bi bi-envelope"></i>
+
+                        </div>
+
+
+                        <div class="info-text">
+
+                            <strong>
+                                Email
+                            </strong>
+
+                            <span>
+                                {{ signup.email }}
+                            </span>
+
+                        </div>
+
+                    </li>
+
+
+
+                    <!-- PHONE -->
+
+                    <li>
+
+                        <div class="info-icon">
+
+                            <i class="bi bi-telephone"></i>
+
+                        </div>
+
+
+                        <div class="info-text">
+
+                            <strong>
+                                Phone
+                            </strong>
+
+                            <span>
+                                {{ signup.phone }}
+                            </span>
+
+                        </div>
+
+                    </li>
+
+
+
+                    <!-- LOCATION -->
+
+                    <li>
+
+                        <div class="info-icon">
+
+                            <i class="bi bi-geo-alt"></i>
+
+                        </div>
+
+
+                        <div class="info-text">
+
+                            <strong>
+                                Location
+                            </strong>
+
+                            <span>
+                                {{ signup.location }}
+                            </span>
+
+                        </div>
+
+                    </li>
+
+
+
+                    <!-- STACK -->
+
+                    <li>
+
+                        <div class="info-icon">
+
+                            <i class="bi bi-code-slash"></i>
+
+                        </div>
+
+
+                        <div class="info-text">
+
+                            <strong>
+                                Primary Stack
+                            </strong>
+
+                            <span>
+                                Python / Django
+                            </span>
+
+                        </div>
+
+                    </li>
+
+
+
+                    <!-- USERNAME -->
+
+                    <li>
+
+                        <div class="info-icon">
+
+                            <i class="bi bi-person"></i>
+
+                        </div>
+
+
+                        <div class="info-text">
+
+                            <strong>
+                                Username
+                            </strong>
+
+                            <span>
+                                {{ signup.username }}
+                            </span>
+
+                        </div>
+
+                    </li>
+
+
+                </ul>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =========================================
+         SOCIAL LINKS + SKILLS
+    ========================================== -->
+
+    <div class="row g-4 mb-4">
+
+
+        <!-- SOCIAL PROFILES -->
+
+        <div class="col-lg-6">
+
+            <div class="card-custom">
+
+
+                <div class="card-header-custom">
+
+                    <h3>
+                        Social Profiles
+                    </h3>
+
+                    <a href="#"
+                       class="edit-link">
+
+                        Edit
+
+                    </a>
+
+                </div>
+
+
+
+                <!-- GITHUB -->
+
+                <div class="social-item">
+
+                    <div class="social-left">
+
+                        <div class="social-icon">
+
+                            <i class="bi bi-github"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <div class="social-name">
+
+                                GitHub
+
+                            </div>
+
+
+                            <div class="social-url">
+
+                                github.com/yourusername
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <i class="bi bi-box-arrow-up-right text-muted"></i>
+
+                </div>
+
+
+
+                <!-- LINKEDIN -->
+
+                <div class="social-item">
+
+                    <div class="social-left">
+
+                        <div class="social-icon">
+
+                            <i class="bi bi-linkedin"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <div class="social-name">
+
+                                LinkedIn
+
+                            </div>
+
+
+                            <div class="social-url">
+
+                                linkedin.com/in/yourusername
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <i class="bi bi-box-arrow-up-right text-muted"></i>
+
+                </div>
+
+
+
+                <!-- TWITTER -->
+
+                <div class="social-item">
+
+                    <div class="social-left">
+
+                        <div class="social-icon">
+
+                            <i class="bi bi-twitter-x"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <div class="social-name">
+
+                                X / Twitter
+
+                            </div>
+
+
+                            <div class="social-url">
+
+                                x.com/yourusername
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <i class="bi bi-box-arrow-up-right text-muted"></i>
+
+                </div>
+
+
+
+                <!-- INSTAGRAM -->
+
+                <div class="social-item">
+
+                    <div class="social-left">
+
+                        <div class="social-icon">
+
+                            <i class="bi bi-instagram"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <div class="social-name">
+
+                                Instagram
+
+                            </div>
+
+
+                            <div class="social-url">
+
+                                instagram.com/yourusername
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <i class="bi bi-box-arrow-up-right text-muted"></i>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================================
+             SKILLS
+        ========================================== -->
+
+        <div class="col-lg-6">
+
+            <div class="card-custom">
+
+
+                <div class="card-header-custom">
+
+                    <h3>
+                        Core Technologies
+                    </h3>
+
+                    <a href="#"
+                       class="edit-link">
+
+                        Manage
+
+                    </a>
+
+                </div>
+
+
+
+                <div class="skills-container">
+
+                    <span class="skill-tag">HTML5</span>
+
+                    <span class="skill-tag">CSS3</span>
+
+                    <span class="skill-tag">JavaScript</span>
+
+                    <span class="skill-tag">Bootstrap</span>
+
+                    <span class="skill-tag">Python</span>
+
+                    <span class="skill-tag">Django</span>
+
+                    <span class="skill-tag">PHP</span>
+
+                    <span class="skill-tag">SQL</span>
+
+                    <span class="skill-tag">SQLite</span>
+
+                    <span class="skill-tag">MySQL</span>
+
+                    <span class="skill-tag">Git</span>
+
+                    <span class="skill-tag">GitHub</span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =========================================
+         ACCOUNT SECURITY
+    ========================================== -->
+
+    <div class="row g-4">
+
+
+        <div class="col-lg-8">
+
+            <div class="card-custom">
+
+
+                <div class="card-header-custom">
+
+                    <h3>
+                        Account Security
+                    </h3>
+
+                    <span>
+                        ADMIN ACCOUNT
+                    </span>
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="security-row">
+
+                    <div class="security-info">
+
+                        <div class="security-icon">
+
+                            <i class="bi bi-key"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                Password
+                            </strong>
+
+                            <span>
+                                Account password
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="security-btn"
+                    >
+
+                        Change Password
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- TWO FACTOR -->
+
+                <div class="security-row">
+
+                    <div class="security-info">
+
+                        <div class="security-icon">
+
+                            <i class="bi bi-shield-check"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                Two-Factor Authentication
+                            </strong>
+
+                            <span>
+                                Add an extra layer of security
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="security-btn"
+                    >
+
+                        Enable
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- LOGOUT -->
+
+                <div class="security-row">
+
+                    <div class="security-info">
+
+                        <div class="security-icon">
+
+                            <i class="bi bi-box-arrow-right"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                Logout
+                            </strong>
+
+                            <span>
+                                Sign out from this admin account
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        href=""
+                        class="security-btn"
+                    >
+
+                        Logout
+
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================================
+             PROFILE STATUS
+        ========================================== -->
+
+        <div class="col-lg-4">
+
+            <div class="card-custom">
+
+
+                <div class="card-header-custom">
+
+                    <h3>
+                        Profile Status
+                    </h3>
+
+                </div>
+
+
+
+                <div class="profile-completion">
+
+
+                    <div class="completion-circle">
+
+                        <strong>
+                            100%
+                        </strong>
+
+                    </div>
+
+
+                    <h4>
+                        Profile Information
+                    </h4>
+
+
+                    <p>
+
+                        Your profile information is connected
+                        to your Signup account.
+
+                    </p>
+
+
+                    <button
+                        type="button"
+                        class="btn-primary-custom"
+                        onclick="window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        })"
+                    >
+
+                        Edit Profile
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+{% endblock body %}

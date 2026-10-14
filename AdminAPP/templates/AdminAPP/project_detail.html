@@ -1,0 +1,667 @@
+{% extends 'AdminAPP/basic.html' %}
+{% load static %}
+{% block title %}View Project | Jesse Admin{% endblock title %}
+
+{% block body %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+<div class="project-view-page">
+
+    <div class="container">
+
+        <!-- =========================
+             BREADCRUMB
+        ========================== -->
+        <div class="breadcrumb-area">
+
+            <a href="/add/dashboard/">
+                <i class="bi bi-house"></i>
+                Dashboard
+            </a>
+
+            <i class="bi bi-chevron-right"></i>
+
+            <a href="/add/projects/">
+                Projects
+            </a>
+
+            <i class="bi bi-chevron-right"></i>
+
+            <span>View Project</span>
+
+        </div>
+
+
+        <!-- =========================
+             PAGE HEADER
+        ========================== -->
+        <div class="page-heading">
+
+            <div>
+
+                <h1>Project Details</h1>
+
+                <p>
+                    View complete information about this project.
+                </p>
+
+            </div>
+
+
+            <div class="heading-actions">
+
+                <a href="{% url 'AdminAPP:projects' %}"
+                   class="normal-btn secondary-btn">
+
+                    <i class="bi bi-arrow-left"></i>
+
+                    Back
+
+                </a>
+
+
+                <a href="{% url 'AdminAPP:project_edit' project.pk %}"
+                   class="normal-btn primary-btn">
+
+                    <i class="bi bi-pencil-square"></i>
+
+                    Edit Project
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             MAIN CONTENT
+        ========================== -->
+        <div class="project-layout">
+
+
+            <!-- =========================
+                 LEFT CONTENT
+            ========================== -->
+            <div class="main-column">
+
+                <div class="project-card">
+
+
+                    <!-- PROJECT IMAGE -->
+                    <div class="project-image-wrapper">
+
+                        {% if project.image %}
+
+                            <img
+                                src="{{ project.image.url }}"
+                                alt="{{ project.title }}"
+                                class="project-image"
+                            >
+
+                        {% else %}
+
+                            <div class="no-image">
+
+                                <i class="bi bi-image"></i>
+
+                                <span>No Image Available</span>
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- PROJECT CONTENT -->
+                    <div class="project-content">
+
+
+                        <!-- CATEGORY -->
+                        <div class="category-badge">
+
+                            <i class="bi bi-folder"></i>
+
+                            {{ project.category }}
+
+                        </div>
+
+
+                        <!-- TITLE -->
+                        <h2 class="project-title">
+
+                            {{ project.title }}
+
+                        </h2>
+
+
+                        <!-- DESCRIPTION -->
+                        <div class="content-section">
+
+                            <div class="section-heading">
+
+                                <div class="section-icon">
+
+                                    <i class="bi bi-file-text"></i>
+
+                                </div>
+
+
+                                <div>
+
+                                    <h3>
+                                        Project Description
+                                    </h3>
+
+                                    <span>
+                                        About this project
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="description">
+
+                                {% if project.description %}
+
+                                    <p>
+                                        {{ project.description }}
+                                    </p>
+
+                                {% else %}
+
+                                    <p class="empty-text">
+
+                                        No project description available.
+
+                                    </p>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- TECHNOLOGIES -->
+                        <div class="content-section">
+
+                            <div class="section-heading">
+
+                                <div class="section-icon">
+
+                                    <i class="bi bi-code-slash"></i>
+
+                                </div>
+
+
+                                <div>
+
+                                    <h3>
+                                        Technologies & Tools
+                                    </h3>
+
+                                    <span>
+                                        Technologies used in this project
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="technology-list">
+
+                                {% if project.technologies %}
+
+                                    <span class="technology-tag">
+
+                                        {{ project.technologies }}
+
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="empty-text">
+
+                                        No technologies specified.
+
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- PROJECT LINKS -->
+                        <div class="content-section">
+
+                            <div class="section-heading">
+
+                                <div class="section-icon">
+
+                                    <i class="bi bi-link-45deg"></i>
+
+                                </div>
+
+
+                                <div>
+
+                                    <h3>
+                                        Project Links
+                                    </h3>
+
+                                    <span>
+                                        External project resources
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="project-links">
+
+
+                                <!-- LIVE PROJECT -->
+                                {% if project.live_project_url %}
+
+                                <a
+                                    href="{{ project.live_project_url }}"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="project-link"
+                                >
+
+                                    <div class="link-icon">
+
+                                        <i class="bi bi-globe2"></i>
+
+                                    </div>
+
+
+                                    <div class="link-information">
+
+                                        <strong>
+                                            Live Project
+                                        </strong>
+
+                                        <span>
+
+                                            {{ project.live_project_url }}
+
+                                        </span>
+
+                                    </div>
+
+
+                                    <i class="bi bi-box-arrow-up-right link-arrow"></i>
+
+                                </a>
+
+                                {% endif %}
+
+
+                                <!-- GITHUB -->
+                                {% if project.github_url %}
+
+                                <a
+                                    href="{{ project.github_url }}"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="project-link"
+                                >
+
+                                    <div class="link-icon">
+
+                                        <i class="bi bi-github"></i>
+
+                                    </div>
+
+
+                                    <div class="link-information">
+
+                                        <strong>
+                                            GitHub Repository
+                                        </strong>
+
+                                        <span>
+
+                                            {{ project.github_url }}
+
+                                        </span>
+
+                                    </div>
+
+
+                                    <i class="bi bi-box-arrow-up-right link-arrow"></i>
+
+                                </a>
+
+                                {% endif %}
+
+
+                                {% if not project.live_project_url and not project.github_url %}
+
+                                <div class="no-links">
+
+                                    <i class="bi bi-link-45deg"></i>
+
+                                    <span>
+                                        No project links available.
+                                    </span>
+
+                                </div>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 RIGHT SIDEBAR
+            ========================== -->
+            <div class="sidebar-column">
+
+
+                <!-- PROJECT INFORMATION -->
+                <div class="sidebar-card">
+
+                    <div class="sidebar-card-header">
+
+                        <div>
+
+                            <h3>
+                                Project Information
+                            </h3>
+
+                            <p>
+                                General project details
+                            </p>
+
+                        </div>
+
+
+                        <div class="header-icon">
+
+                            <i class="bi bi-info-circle"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="sidebar-card-body">
+
+
+                        <!-- STATUS -->
+                        <div class="information-row">
+
+                            <div class="information-label">
+
+                                <i class="bi bi-circle-fill"></i>
+
+                                Status
+
+                            </div>
+
+
+                            <div class="status-badge
+                                {% if project.status == 'published' %}
+                                    published
+                                {% else %}
+                                    draft
+                                {% endif %}
+                            ">
+
+                                {{ project.status }}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- CATEGORY -->
+                        <div class="information-row">
+
+                            <div class="information-label">
+
+                                <i class="bi bi-folder"></i>
+
+                                Category
+
+                            </div>
+
+
+                            <div class="information-value">
+
+                                {{ project.category }}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- DISPLAY ORDER -->
+                        <div class="information-row">
+
+                            <div class="information-label">
+
+                                <i class="bi bi-list-ol"></i>
+
+                                Display Order
+
+                            </div>
+
+
+                            <div class="information-value">
+
+                                {{ project.display_order }}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- CREATED -->
+                        <div class="information-row">
+
+                            <div class="information-label">
+
+                                <i class="bi bi-calendar-plus"></i>
+
+                                Created
+
+                            </div>
+
+
+                            <div class="information-value">
+
+                                {{ project.created_at|date:"M d, Y" }}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- UPDATED -->
+                        <div class="information-row">
+
+                            <div class="information-label">
+
+                                <i class="bi bi-clock-history"></i>
+
+                                Last Updated
+
+                            </div>
+
+
+                            <div class="information-value">
+
+                                {{ project.updated_at }}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- QUICK ACTIONS -->
+                <div class="sidebar-card">
+
+                    <div class="sidebar-card-header">
+
+                        <div>
+
+                            <h3>
+                                Quick Actions
+                            </h3>
+
+                            <p>
+                                Manage this project
+                            </p>
+
+                        </div>
+
+
+                        <div class="header-icon">
+
+                            <i class="bi bi-lightning"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="sidebar-card-body">
+
+                        <div class="quick-actions">
+
+
+                            <a
+                                href="{% url 'AdminAPP:project_edit' project.pk %}"
+                                class="quick-action primary-action"
+                            >
+
+                                <i class="bi bi-pencil-square"></i>
+
+                                <span>
+                                    Edit Project
+                                </span>
+
+                                <i class="bi bi-chevron-right action-arrow"></i>
+
+                            </a>
+
+
+                            <a
+                                href="{% url 'AdminAPP:projects' %}"
+                                class="quick-action secondary-action"
+                            >
+
+                                <i class="bi bi-arrow-left"></i>
+
+                                <span>
+                                    Back to Projects
+                                </span>
+
+                                <i class="bi bi-chevron-right action-arrow"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DANGER ZONE -->
+                <div class="danger-card">
+
+                    <div class="danger-header">
+
+                        <div class="danger-icon">
+
+                            <i class="bi bi-exclamation-triangle"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Danger Zone
+                            </h3>
+
+                            <p>
+                                Irreversible actions
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="danger-body">
+
+                        <p>
+                            Deleting this project is permanent and cannot be undone.
+                        </p>
+
+              <a href="{% url 'AdminAPP:project_del' project.pk %}">
+                        <button type="button" class="delete-btn">
+                        <i class="bi bi-trash3"></i>
+                            Delete Project
+                        </button>
+                       </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function confirmDelete() {
+
+    const confirmed = confirm(
+        "Are you sure you want to delete this project? This action cannot be undone."
+    );
+
+    if (confirmed) {
+
+        // Your Django delete backend can be connected here later.
+        alert("Delete action will be connected to Django.");
+
+    }
+
+}
+
+</script>
+
+{% endblock body %}

@@ -1,0 +1,322 @@
+```django
+{% extends "AdminAPP/basic.html" %}
+{% load static %}
+
+{% block title %}View Message | Jesse Admin{% endblock title %}
+
+{% block body %}
+
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+<div class="content">
+
+    <!-- HEADER -->
+    <div class="content-header">
+
+        <div>
+            <h1>View Message</h1>
+            <p>Read the full message sent through your portfolio contact form.</p>
+        </div>
+
+        <a href="{% url 'AdminAPP:messages' %}" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i>
+            Back to Messages
+        </a>
+
+    </div>
+
+
+    <!-- DJANGO MESSAGES -->
+    {% if messages %}
+        {% for message in messages %}
+
+            <div class="alert alert-{{ message.tags|default:'success' }} alert-dismissible fade show mt-3"
+                 role="alert">
+
+                {% if message.tags == 'error' %}
+                    <i class="bi bi-exclamation-circle-fill"></i>
+                {% else %}
+                    <i class="bi bi-check-circle-fill"></i>
+                {% endif %}
+
+                {{ message }}
+
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert">
+                </button>
+
+            </div>
+
+        {% endfor %}
+    {% endif %}
+
+
+    <!-- MESSAGE CARD -->
+    <div class="message-view-card">
+
+        <!-- MESSAGE HEADER -->
+        <div class="message-view-header">
+
+            <div class="sender-info">
+
+                <div class="sender-avatar">
+                    {{ object.name|first|upper }}
+                </div>
+
+                <div>
+
+                    <h3>{{ object.name }}</h3>
+
+                    <a href="mailto:{{ object.email }}">
+                        {{ object.email }}
+                    </a>
+
+                    {% if object.phone %}
+
+                        <span class="phone">
+                            {{ object.phone }}
+                        </span>
+
+                    {% else %}
+
+                        <span class="phone">
+                            No phone number
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- MESSAGE STATUS -->
+            <div class="message-status">
+
+                {% if object.is_read %}
+
+                    <span class="status-badge read">
+                        <i class="bi bi-check-circle"></i>
+                        Read
+                    </span>
+
+                {% else %}
+
+                    <span class="status-badge unread">
+                        <i class="bi bi-envelope"></i>
+                        Unread
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <!-- MESSAGE INFORMATION -->
+        <div class="message-information">
+
+            <div class="information-item">
+
+                <span class="information-label">
+                    Subject
+                </span>
+
+                <strong>
+                    {{ object.subject }}
+                </strong>
+
+            </div>
+
+
+            <div class="information-item">
+
+                <span class="information-label">
+                    Service
+                </span>
+
+                <strong>
+                    {{ object.service }}
+                </strong>
+
+            </div>
+
+
+            <div class="information-item">
+
+                <span class="information-label">
+                    Budget
+                </span>
+
+                <strong>
+                    {% if object.budget %}
+                        {{ object.budget }}
+                    {% else %}
+                        Not specified
+                    {% endif %}
+                </strong>
+
+            </div>
+
+
+            <div class="information-item">
+
+                <span class="information-label">
+                    Timeline
+                </span>
+
+                <strong>
+                    {% if object.timeline %}
+                        {{ object.timeline }}
+                    {% else %}
+                        Not specified
+                    {% endif %}
+                </strong>
+
+            </div>
+
+
+            <div class="information-item">
+
+                <span class="information-label">
+                    Date Sent
+                </span>
+
+                <strong>
+                    {{ object.created_at|date:"M d, Y - h:i A" }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- VISITOR MESSAGE -->
+        <div class="message-content">
+
+            <div class="message-content-header">
+
+                <i class="bi bi-chat-left-text"></i>
+
+                <h3>Visitor Message</h3>
+
+            </div>
+
+            <div class="message-text">
+                {{ object.message|linebreaksbr }}
+            </div>
+
+        </div>
+
+
+        <!-- AI GENERATED REPLY -->
+        <div class="message-content ai-reply-section">
+
+            <div class="message-content-header">
+
+                <i class="bi bi-robot"></i>
+
+                <h3>AI Generated Reply</h3>
+
+            </div>
+
+            <div class="message-text">
+
+                {% if object.ai_reply %}
+
+                    {{ object.ai_reply|linebreaksbr }}
+
+                {% else %}
+
+                    <p>
+                        No AI reply has been generated for this message.
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <!-- MANUAL REPLY FORM -->
+        <form action="" method="post" style="width: 60%; margin-left: 10px;">
+
+            {% csrf_token %}
+
+            <div class="dash-form mt-4">
+
+                <label class="form-label mono">
+                    Reply to {{ object.email }}
+                </label>
+
+                <textarea
+                    name="reply"
+                    rows="6"
+                    placeholder="Type Your Message............"
+                    required></textarea>
+
+                <div class="dash-form-actions mt-3">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary mb-2">
+
+                        <i class="bi bi-send"></i>
+                        Send Reply
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+
+        <!-- ACTIONS -->
+        <div class="message-actions">
+
+            {% if object.is_read %}
+
+                <a
+                    href="{% url 'AdminAPP:mark_message_read' object.pk %}"
+                    class="btn btn-warning">
+
+                    <i class="bi bi-envelope"></i>
+                    Mark as Unread
+
+                </a>
+
+            {% else %}
+
+                <a
+                    href="{% url 'AdminAPP:mark_message_read' object.pk %}"
+                    class="btn btn-success">
+
+                    <i class="bi bi-check-circle"></i>
+                    Mark as Read
+
+                </a>
+
+            {% endif %}
+
+
+            <a
+                href="{% url 'AdminAPP:message_del' object.pk %}"
+                class="btn btn-danger">
+
+                <i class="bi bi-trash"></i>
+                Delete
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock body %}

@@ -1,0 +1,493 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<meta name="description"
+      content="Jesse Portfolio Admin Dashboard">
+
+<title>
+    {% block title %}
+        Admin Dashboard | Jesse
+    {% endblock title %}
+</title>
+
+
+<!-- =====================================================
+     BOOTSTRAP CSS
+====================================================== -->
+
+<link href="{% static 'css/bootstrap.min.css' %}"
+      rel="stylesheet">
+
+
+<!-- =====================================================
+     BOOTSTRAP ICONS
+====================================================== -->
+
+<link rel="stylesheet"
+      href="{% static 'bootstrap-icons/font/bootstrap-icons.min.css' %}">
+
+
+<!-- =====================================================
+     GOOGLE FONTS
+====================================================== -->
+
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet">
+
+
+<!-- =====================================================
+     CUSTOM CSS
+====================================================== -->
+
+<link rel="stylesheet"
+      href="{% static 'admin.css' %}">
+
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     SIDEBAR OVERLAY
+===================================================== -->
+
+<!-- <div class="sidebar-overlay"
+     id="sidebarOverlay">
+</div> -->
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar"
+       id="sidebar">
+
+
+<!-- =====================================================
+     LOGO
+====================================================== -->
+
+<div class="sidebar-logo">
+
+    <a href="/add/dashboard/">
+
+        <span>&lt;</span>Jesse<span>/&gt;</span>
+
+    </a>
+
+</div>
+
+
+
+<!-- =====================================================
+     SIDEBAR MENU
+====================================================== -->
+
+<div class="sidebar-menu">
+
+
+    <!-- =========================
+         ADMIN PANEL
+    ========================== -->
+
+    <div class="menu-title">
+
+        ADMIN PANEL
+
+    </div>
+
+
+    <a href="/add/"
+       class="sidebar-link">
+
+        <i class="bi bi-grid-1x2-fill"></i>
+
+        <span>
+            Dashboard
+        </span>
+
+    </a>
+
+
+    <a href="/add/projects/"
+       class="sidebar-link">
+
+        <i class="bi bi-folder-fill"></i>
+
+        <span>
+            Projects
+        </span>
+
+        <span class="sidebar-badge">
+
+            20
+
+        </span>
+
+    </a>
+
+
+    <a href="/add/experiences/"
+       class="sidebar-link">
+
+        <i class="bi bi-briefcase-fill"></i>
+
+        <span>
+            Experience
+        </span>
+
+    </a>
+
+
+    <a href="/add/skills/"
+       class="sidebar-link">
+
+        <i class="bi bi-code-slash"></i>
+
+        <span>
+            Skills
+        </span>
+
+    </a>
+
+    <!-- =========================
+         CONTENT
+    ========================== -->
+
+    <div class="menu-title">
+
+        CONTENT
+
+    </div>
+
+
+    <a href="/add/messages/"
+       class="sidebar-link">
+
+        <i class="bi bi-chat-left-text-fill"></i>
+
+        <span>
+            Messages
+        </span>
+
+        <span class="sidebar-badge danger">
+
+            4
+
+        </span>
+
+    </a>
+
+
+
+    <!-- =========================
+         MANAGEMENT
+    ========================== -->
+
+    <div class="menu-title">
+
+        MANAGEMENT
+
+    </div>
+
+
+    <a href="{% url 'AdminAPP:profile'%}"
+       class="sidebar-link">
+
+        <i class="bi bi-person-fill"></i>
+
+        <span>
+            Profile
+        </span>
+
+    </a>
+
+
+
+    <a href="{% url 'AdminAPP:logout'%}"
+       class="sidebar-link logout-link">
+
+        <i class="bi bi-box-arrow-right"></i>
+
+        <span>
+            Logout
+        </span>
+
+    </a>
+
+
+</div>
+
+
+</aside>
+
+<!-- =====================================================
+     MAIN WRAPPER
+===================================================== -->
+
+<div class="main-wrapper">
+
+
+<!-- =====================================================
+     TOPBAR
+====================================================== -->
+
+<header class="topbar">
+
+
+    <!-- =========================
+         LEFT SIDE
+    ========================== -->
+
+    <div class="topbar-left">
+
+
+        <button class="menu-toggle"
+                id="menuToggle"
+                type="button">
+
+            <i class="bi bi-list"></i>
+
+        </button>
+
+
+        <div class="topbar-title">
+
+            <h5>
+                Portfolio Admin
+            </h5>
+
+            <span>
+                Manage your portfolio
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =========================
+         RIGHT SIDE
+    ========================== -->
+
+    <div class="topbar-right">
+
+
+        <!-- Notification -->
+
+        <a href="/add/messages/"
+           class="topbar-icon"
+           title="Messages">
+
+            <i class="bi bi-bell"></i>
+
+            <span class="notification-dot"></span>
+
+        </a>
+
+
+
+        <!-- Admin Profile -->
+
+        <a href="/add/profile/"
+           class="admin-profile">
+
+
+            <div class="admin-avatar">
+
+                JD
+
+            </div>
+
+
+            <div class="admin-info">
+
+                <strong>
+
+                    Jesse Developer
+
+                </strong>
+
+
+                <span>
+
+                    Administrator
+
+                </span>
+
+            </div>
+
+
+            <i class="bi bi-chevron-down
+                      profile-arrow">
+
+            </i>
+
+
+        </a>
+
+
+    </div>
+
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+====================================================== -->
+
+<main class="dashboard-content">
+
+
+    {% block body %}
+
+    {% endblock body %}
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer class="dashboard-footer">
+
+
+    <div class="footer-content">
+
+
+        <span>
+
+            © 2026 Jesse Admin Dashboard
+
+        </span>
+
+
+        <span>
+
+            Portfolio Management System
+
+        </span>
+
+
+    </div>
+
+
+</footer>
+
+
+</div>
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+    const menuToggle = document.getElementById('menuToggle');
+
+    const sidebar = document.getElementById('sidebar');
+
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+
+    if (menuToggle) {
+
+        menuToggle.addEventListener('click', function () {
+
+            sidebar.classList.toggle('show');
+
+            sidebarOverlay.classList.toggle('show');
+
+        });
+
+    }
+
+
+
+    if (sidebarOverlay) {
+
+        sidebarOverlay.addEventListener('click', function () {
+
+            sidebar.classList.remove('show');
+
+            sidebarOverlay.classList.remove('show');
+
+        });
+
+    }
+
+
+
+    /* =====================================================
+       ACTIVE SIDEBAR LINK
+    ====================================================== */
+
+    const currentPath = window.location.pathname;
+
+    const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+
+    sidebarLinks.forEach(function (link) {
+
+        const linkPath = link.getAttribute('href');
+
+
+        if (linkPath === currentPath) {
+
+            link.classList.add('active');
+
+        }
+
+
+        link.addEventListener('click', function () {
+
+            if (window.innerWidth <= 991) {
+
+                sidebar.classList.remove('show');
+
+                sidebarOverlay.classList.remove('show');
+
+            }
+
+        });
+
+    });
+
+</script>
+
+<!-- =====================================================
+     BOOTSTRAP JAVASCRIPT
+===================================================== -->
+
+<script src="{% static 'js/bootstrap.min.js' %}">
+
+</script>
+
+</body>
+
+</html>

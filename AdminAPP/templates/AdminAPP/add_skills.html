@@ -1,0 +1,468 @@
+{% extends 'AdminAPP/basic.html' %}
+
+{% load static %}
+
+{% block title %}
+
+Add Skill | Jesse Admin
+
+{% endblock title %}
+
+{% block body %}
+
+<!-- ============================================
+     PAGE CONTENT
+============================================= -->
+
+<div class="content-wrapper">
+
+
+<!-- ========================================
+     BREADCRUMB
+========================================= -->
+
+<div class="custom-breadcrumb">
+
+
+    <a href="/add/dashboard/">
+
+        Dashboard
+
+    </a>
+
+
+    <span>
+
+        /
+
+    </span>
+
+
+    <a href="/add/skills/">
+
+        Skills
+
+    </a>
+
+
+    <span>
+
+        /
+
+    </span>
+
+
+  <a href="/add/add_skills/"> Add Skill</a> 
+
+
+</div>
+
+
+
+<!-- ========================================
+     ADD SKILL FORM
+========================================= -->
+
+<div class="form-card">
+
+
+    <!-- FORM HEADER -->
+
+    <div class="form-card-header">
+
+
+        <h5>
+
+            Skill Information
+
+        </h5>
+
+
+        <p>
+
+            Add a new technology or skill to your portfolio.
+
+        </p>
+
+
+    </div>
+
+
+
+    <!-- FORM BODY -->
+
+    <div class="form-card-body">
+
+
+        <form method="POST">
+
+
+            {% csrf_token %}
+
+
+            <div class="row g-4">
+
+
+                <!-- SKILL NAME -->
+
+                <div class="col-md-6">
+
+
+                    <label class="form-label">
+
+                        Skill Name
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        name="name"
+                        class="form-control"
+                        placeholder="Example: Python"
+                        required>
+
+
+                </div>
+
+
+
+                <!-- CATEGORY -->
+
+                <div class="col-md-6">
+
+
+                    <label class="form-label">
+
+                        Skill Category
+
+                    </label>
+
+
+                    <select
+                        class="form-select"
+                        name="category"
+                        required>
+
+
+                        <option value="">
+
+                            Select Category
+
+                        </option>
+
+
+                        <option value="Frontend Development">
+
+                            Frontend Development
+
+                        </option>
+
+
+                        <option value="Backend Development">
+
+                            Backend Development
+
+                        </option>
+
+
+                        <option value="Database">
+
+                            Database
+
+                        </option>
+
+
+                        <option value="Tools & Technologies">
+
+                            Tools & Technologies
+
+                        </option>
+
+
+                        <option value="Other">
+
+                            Other
+
+                        </option>
+
+
+                    </select>
+
+
+                </div>
+
+
+
+                <!-- PROFICIENCY -->
+
+                <div class="col-md-6">
+
+
+                    <label class="form-label">
+
+                        Proficiency Level
+
+                    </label>
+
+
+                    <div class="d-flex
+                                align-items-center
+                                gap-3">
+
+
+                        <input
+                            type="range"
+                            class="form-range"
+                            name="proficiency"
+                            min="0"
+                            max="100"
+                            value="80"
+                            id="skillRange">
+
+
+                        <div
+                            class="range-value"
+                            id="rangeValue">
+
+                            80%
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="form-text">
+
+                        Select your proficiency level from 0 to 100.
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- DISPLAY ORDER -->
+
+                <div class="col-md-6">
+
+
+                    <label class="form-label">
+
+                        Display Order
+
+                    </label>
+
+
+                    <input
+                        type="number"
+                        name="display_order"
+                        class="form-control"
+                        placeholder="Example: 1"
+                        min="1">
+
+
+                    <div class="form-text">
+
+                        Determines the order of this skill on your portfolio.
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- ICON -->
+
+                <div class="col-md-6">
+
+
+                    <label class="form-label">
+
+                        Skill Icon Class
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        name="icon"
+                        class="form-control"
+                        id="iconInput"
+                        placeholder="Example: bi bi-filetype-py">
+
+
+                    <div class="form-text">
+
+                        Use a Bootstrap Icons class.
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- ICON PREVIEW -->
+
+                <div class="col-md-6">
+
+
+                    <label class="form-label">
+
+                        Icon Preview
+
+                    </label>
+
+
+                    <div
+                        class="icon-preview"
+                        id="iconPreview">
+
+
+                        <i class="bi bi-code-square"></i>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="col-12">
+
+
+                    <label class="form-label">
+
+                        Skill Description
+
+                    </label>
+
+
+                    <textarea
+                        name="description"
+                        class="form-control"
+                        placeholder="Write a short description about this skill..."></textarea>
+
+
+                    <div class="form-text">
+
+                        Briefly describe your experience with this technology.
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- STATUS -->
+
+                <div class="col-md-6">
+
+
+                    <label class="form-label">
+
+                        Status
+
+                    </label>
+
+
+                    <select
+                        class="form-select"
+                        name="status">
+
+
+                        <option
+                            value="active"
+                            selected>
+
+                            Active
+
+                        </option>
+
+
+                        <option
+                            value="inactive">
+
+                            Inactive
+
+                        </option>
+
+
+                    </select>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ====================================
+                 FORM ACTIONS
+            ===================================== -->
+
+            <div class="form-actions">
+
+
+                <button
+                    type="submit"
+                    class="btn-save">
+
+
+                    <i class="bi bi-plus-lg me-2"></i>
+
+                    Add Skill
+
+
+                </button>
+
+
+                <a
+                    href="#"
+                    class="btn-cancel">
+
+                    Cancel
+
+                </a>
+
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+
+</div>
+
+
+</div>
+
+
+<script> /* ============================================ SKILL RANGE ============================================= */ 
+const skillRange = document.getElementById("skillRange"); 
+const rangeValue = document.getElementById("rangeValue");
+ skillRange.addEventListener( "input", function () { rangeValue.textContent = skillRange.value + "%"; } );
+  /* ============================================ ICON PREVIEW ============================================= */ 
+  const iconInput = document.getElementById("iconInput"); 
+  const iconPreview = document.getElementById("iconPreview");
+   iconInput.addEventListener( "input", function () { const iconClass = iconInput.value.trim();
+    if (iconClass !== "") { iconPreview.innerHTML = '<i class="' + iconClass + '"></i>'; } 
+    else { iconPreview.innerHTML = '<i class="bi bi-code-square"></i>'; } } );
+     </script>
+
+{% endblock body %}
+
+
+

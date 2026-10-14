@@ -1,0 +1,749 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %} Experience {% endblock title %}
+
+{% block body %}
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="experience-hero">
+
+    <div class="container">
+
+
+        <p class="hero-label">
+
+            06. EXPERIENCE
+
+        </p>
+
+
+        <h1>
+
+            My Professional
+            <span>Journey.</span>
+
+        </h1>
+
+
+        <p>
+
+            A look at my professional experience, the
+            projects I've contributed to, the technologies
+            I've worked with, and the skills I've developed
+            throughout my journey as a web developer.
+
+        </p>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     EXPERIENCE TIMELINE
+===================================================== -->
+
+<section class="experience-section">
+
+    <div class="container">
+
+
+        <div class="text-center">
+
+
+            <p class="section-label">
+
+                CAREER JOURNEY
+
+            </p>
+
+
+            <h2 class="section-title">
+
+                Experience & Roles
+
+            </h2>
+
+
+            <p class="section-description mx-auto">
+
+                My experience is built around solving practical
+                problems, developing web applications and
+                continuously improving my technical skills.
+
+            </p>
+
+
+        </div>
+
+    {% for experience in newexperience %}
+
+        <div class="timeline">
+
+
+            <!-- =================================================
+                 EXPERIENCE 01
+            ================================================== -->
+
+            <div class="timeline-item">
+
+
+                <div class="timeline-dot"></div>
+
+
+                <div class="experience-card">
+
+
+                    <div class="experience-top">
+
+
+                        <div>
+
+                            <h3>
+
+                                {{ experience.title }}
+
+                            </h3>
+
+
+                            <div class="company">
+
+                                {{ experience.company }}
+
+                            </div>
+
+                        </div>
+
+
+                        <span class="date">
+                            {{ experience.start_date }} — {{ experience.end_date }}
+
+                        </span>
+
+
+                    </div>
+
+
+                    <p>
+                        {{ experience.description }}
+
+                    </p>
+
+
+                   <ul class="responsibilities">
+
+                             {% for responsibility in experience.responsibility_list %}
+
+                              <li>
+                               {{ responsibility }}
+                                     </li>
+
+                                  {% endfor %}
+
+                                </ul>
+                    <div class="tech-stack">
+
+
+                        <span class="tech-tag">
+                            {{ experience.technologies }}
+                        </span>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+                    {% endfor %}
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CAREER STATISTICS
+===================================================== -->
+
+<section class="stats-section">
+
+    <div class="container">
+
+
+        <div class="text-center mb-5">
+
+
+            <p class="section-label">
+
+                EXPERIENCE AT A GLANCE
+
+            </p>
+
+
+            <h2 class="section-title">
+
+                My Development Journey
+
+            </h2>
+
+
+        </div>
+
+
+        <div class="row g-4">
+
+
+            <div class="col-6 col-lg-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-number">
+                        4+
+                    </div>
+
+                    <div class="stat-label">
+                        Years Learning & Building
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-6 col-lg-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-number">
+                        20+
+                    </div>
+
+                    <div class="stat-label">
+                        Projects Built
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-6 col-lg-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-number">
+                        10+
+                    </div>
+
+                    <div class="stat-label">
+                        Technologies
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-6 col-lg-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-number">
+                        100%
+                    </div>
+
+                    <div class="stat-label">
+                        Commitment to Learning
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     HIGHLIGHTS
+===================================================== -->
+
+<section class="highlights-section">
+
+    <div class="container">
+
+
+        <div class="text-center mb-5">
+
+
+            <p class="section-label">
+
+                WHAT I BRING
+
+            </p>
+
+
+            <h2 class="section-title">
+
+                Experience Highlights
+
+            </h2>
+
+
+            <p class="section-description mx-auto">
+
+                Beyond job titles, these are the areas where
+                I've developed practical experience.
+
+            </p>
+
+
+        </div>
+
+
+        <div class="row g-4">
+
+
+            <!-- CARD 01 -->
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="highlight-card">
+
+                    <div class="highlight-icon">
+
+                        <i class="bi bi-window-stack"></i>
+
+                    </div>
+
+
+                    <h4>
+
+                        Full-Stack Development
+
+                    </h4>
+
+
+                    <p>
+
+                        Comfortable working across frontend
+                        interfaces, backend logic, databases
+                        and application architecture.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CARD 02 -->
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="highlight-card">
+
+                    <div class="highlight-icon">
+
+                        <i class="bi bi-server"></i>
+
+                    </div>
+
+
+                    <h4>
+
+                        Backend Development
+
+                    </h4>
+
+
+                    <p>
+
+                        Experience building dynamic systems
+                        using Python, Django, PHP, databases
+                        and server-side application logic.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CARD 03 -->
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="highlight-card">
+
+                    <div class="highlight-icon">
+
+                        <i class="bi bi-database"></i>
+
+                    </div>
+
+
+                    <h4>
+
+                        Database Systems
+
+                    </h4>
+
+
+                    <p>
+
+                        Designing database structures,
+                        relationships, queries and CRUD-based
+                        applications.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CARD 04 -->
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="highlight-card">
+
+                    <div class="highlight-icon">
+
+                        <i class="bi bi-phone"></i>
+
+                    </div>
+
+
+                    <h4>
+
+                        Responsive Development
+
+                    </h4>
+
+
+                    <p>
+
+                        Building interfaces that provide a
+                        consistent experience across phones,
+                        tablets and desktop devices.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CARD 05 -->
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="highlight-card">
+
+                    <div class="highlight-icon">
+
+                        <i class="bi bi-bug"></i>
+
+                    </div>
+
+
+                    <h4>
+
+                        Debugging & Problem Solving
+
+                    </h4>
+
+
+                    <p>
+
+                        Finding bugs, understanding application
+                        behavior and developing practical
+                        solutions to technical problems.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CARD 06 -->
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="highlight-card">
+
+                    <div class="highlight-icon">
+
+                        <i class="bi bi-arrow-repeat"></i>
+
+                    </div>
+
+
+                    <h4>
+
+                        Continuous Learning
+
+                    </h4>
+
+
+                    <p>
+
+                        Continuously improving my development
+                        skills by building projects and learning
+                        new technologies.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     LEARNING
+===================================================== -->
+
+<section class="learning-section">
+
+    <div class="container">
+
+
+        <div class="row align-items-center g-5">
+
+
+            <div class="col-lg-5">
+
+
+                <p class="section-label">
+
+                    ALWAYS LEARNING
+
+                </p>
+
+
+                <h2 class="section-title text-white">
+
+                    The Journey
+                    Doesn't Stop.
+
+                </h2>
+
+
+                <p class="section-description"
+                   style="color:#94a3b8;">
+
+                    Technology changes constantly.
+                    I believe a good developer should always
+                    be learning, experimenting and improving.
+
+                </p>
+
+
+            </div>
+
+
+            <div class="col-lg-7">
+
+
+                <div class="row g-4">
+
+
+                    <div class="col-md-6">
+
+                        <div class="learning-card">
+
+                            <i class="bi bi-code-square"></i>
+
+                            <h4>
+                                Modern Development
+                            </h4>
+
+                            <p>
+
+                                Exploring better development
+                                practices, frameworks and
+                                modern web technologies.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <div class="learning-card">
+
+                            <i class="bi bi-lightbulb"></i>
+
+                            <h4>
+                                Problem Solving
+                            </h4>
+
+                            <p>
+
+                                Strengthening my ability to
+                                break complex problems into
+                                practical solutions.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <div class="learning-card">
+
+                            <i class="bi bi-cloud-arrow-up"></i>
+
+                            <h4>
+                                Deployment
+                            </h4>
+
+                            <p>
+
+                                Learning more about deployment,
+                                hosting, servers and production
+                                environments.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <div class="learning-card">
+
+                            <i class="bi bi-shield-check"></i>
+
+                            <h4>
+                                Better Security
+                            </h4>
+
+                            <p>
+
+                                Improving knowledge of secure
+                                authentication, validation and
+                                web application security.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="cta">
+
+    <div class="container">
+
+
+        <p class="section-label">
+
+            LET'S BUILD SOMETHING
+
+        </p>
+
+
+        <h2>
+
+            Ready to Work Together?
+
+        </h2>
+
+
+        <p>
+
+            If you're looking for a developer to help turn
+            your idea into a functional web solution,
+            let's start a conversation.
+
+        </p>
+
+
+        <div class="d-flex
+                    justify-content-center
+                    flex-wrap
+                    gap-3">
+
+
+            <a href="/contact/"
+               class="btn-primary-custom">
+
+                Let's Talk
+
+                <i class="bi bi-arrow-right ms-2"></i>
+
+            </a>
+
+
+            <a href="/projects/"
+               class="btn-dark-custom">
+
+                View Projects
+
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+{%endblock body %}

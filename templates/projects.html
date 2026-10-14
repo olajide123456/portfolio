@@ -1,0 +1,719 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %} Projects {% endblock title %}
+
+ {% block body %}
+
+ <!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="page-hero">
+
+    <div class="container">
+
+
+        <p class="page-label">
+            04. PROJECTS
+        </p>
+
+
+        <h1>
+
+            Things I've
+            <span>Built.</span>
+
+        </h1>
+
+
+        <p>
+
+            A collection of websites, web applications and
+            software projects I've worked on. Each project
+            represents a problem solved through design,
+            development and technology.
+
+        </p>
+
+
+        <nav aria-label="breadcrumb">
+
+            <ol class="breadcrumb">
+
+                <li class="breadcrumb-item">
+
+                    <a href="/">
+                        Home
+                    </a>
+
+                </li>
+
+                <li class="breadcrumb-item active">
+
+                    Projects
+
+                </li>
+
+            </ol>
+
+        </nav>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PROJECT STATS
+===================================================== -->
+
+<section class="stats-section">
+
+    <div class="container">
+
+
+        <div class="row g-4">
+
+
+            <div class="col-6 col-lg-3">
+
+                <div class="stat">
+
+                    <div class="stat-number">
+                        10<span>+</span>
+                    </div>
+
+                    <p>
+                        Projects Built
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-6 col-lg-3">
+
+                <div class="stat">
+
+                    <div class="stat-number">
+                        5<span>+</span>
+                    </div>
+
+                    <p>
+                        Technologies
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-6 col-lg-3">
+
+                <div class="stat">
+
+                    <div class="stat-number">
+                        100<span>%</span>
+                    </div>
+
+                    <p>
+                        Responsive
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-6 col-lg-3">
+
+                <div class="stat">
+
+                    <div class="stat-number">
+                        24<span>/7</span>
+                    </div>
+
+                    <p>
+                        Learning & Building
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PROJECTS
+===================================================== -->
+
+<section>
+
+    <div class="container">
+
+
+        <div class="text-center mb-5">
+
+
+            <p class="section-label">
+                SELECTED WORK
+            </p>
+
+
+            <h2 class="section-title">
+                My Recent Projects
+            </h2>
+
+
+            <p class="section-description mx-auto">
+
+                Here are some of the projects that demonstrate
+                my experience with frontend development,
+                backend systems, databases and full-stack
+                application development.
+
+            </p>
+
+
+        </div>
+
+
+
+        <div class="row g-4">
+
+    {% for project in newproject %}
+
+    <div class="col-md-6 col-lg-4">
+
+        <div class="project-card">
+
+            <!-- PROJECT IMAGE -->
+
+            <div class="project-image">
+
+                {% if project.image %}
+
+                    <img
+                        src="{{ project.image.url }}"
+                        alt="{{ project.title }}"
+                    >
+
+                {% else %}
+
+                    <div class="project-screen">
+
+                        <div class="screen-top">
+
+                            <span class="screen-dot"></span>
+                            <span class="screen-dot"></span>
+                            <span class="screen-dot"></span>
+
+                        </div>
+
+                        <div class="screen-content">
+
+                            <div class="screen-line"></div>
+
+                            <div class="screen-line short"></div>
+
+                            <div class="screen-boxes">
+
+                                <div class="screen-box"></div>
+                                <div class="screen-box"></div>
+                                <div class="screen-box"></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- PROJECT OVERLAY -->
+
+                <div class="project-overlay">
+
+                    {% if project.live_url %}
+
+                    <a
+                        href="{{ project.live_url }}"
+                        target="_blank"
+                        class="overlay-btn"
+                        title="Live Demo"
+                    >
+
+                        <i class="bi bi-box-arrow-up-right"></i>
+
+                    </a>
+
+                    {% endif %}
+
+
+                    {% if project.github_url %}
+
+                    <a
+                        href="{{ project.github_url }}"
+                        target="_blank"
+                        class="overlay-btn"
+                        title="GitHub"
+                    >
+
+                        <i class="bi bi-github"></i>
+
+                    </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- PROJECT BODY -->
+
+            <div class="project-body">
+
+
+                <!-- CATEGORY -->
+
+                <div class="project-category">
+
+                    {{ project.category }}
+
+                </div>
+
+
+                <!-- TITLE -->
+
+                <h3>
+
+                    {{ project.title }}
+
+                </h3>
+
+
+                <!-- DESCRIPTION -->
+
+                <p>
+
+                    {{ project.description }}
+
+                </p>
+
+
+                <!-- TECHNOLOGIES -->
+
+                <div class="tech-stack">
+
+                    {% if project.technologies %}
+
+                        {% for technology in project.technologies.split %}
+
+                            <span class="tech">
+
+                                {{ technology }}
+
+                            </span>
+
+                        {% endfor %}
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- PROJECT LINKS -->
+
+                <div class="project-links">
+
+
+                    {% if project.github_url %}
+
+                    <a
+                        href="{{ project.github_url }}"
+                        target="_blank"
+                        class="project-link"
+                    >
+
+                        <i class="bi bi-github"></i>
+
+                       Live Demo
+
+                    </a>
+
+                    {% endif %}
+
+
+                    {% if project.live_url %}
+
+                    <a
+                        href="{{ project.live_url }}"
+                        target="_blank"
+                        class="project-link"
+                    >
+
+                        Live Demo
+
+                        <i class="bi bi-arrow-up-right"></i>
+
+                    </a>
+
+                    {% endif %}
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <div class="col-12">
+
+        <div class="text-center">
+
+            <h3>No Projects Found</h3>
+
+            <p>
+                Projects will appear here when they are added.
+            </p>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+            
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FEATURED PROJECT
+===================================================== -->
+
+{% if newproject %}
+
+<section class="featured-section">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <p class="section-label">
+                FEATURED PROJECT
+            </p>
+
+            <h2 class="section-title">
+                A Project I'm Proud Of
+            </h2>
+
+        </div>
+
+
+        <div class="featured-project">
+
+            <div class="row g-0 align-items-stretch">
+
+
+                <!-- VISUAL -->
+
+                <div class="col-lg-6">
+
+                    <div class="featured-visual">
+
+                        {% if newproject.1.image %}
+
+                            <img
+                                src="{{ newproject.1.image.url }}"
+                                alt="{{ newproject.1.title }}" style="padding-left: 20px;"
+                                class="img-fluid w-100 h-100"
+                            >
+
+                        {% else %}
+
+                            <div class="featured-browser">
+
+                                <div class="browser-header">
+
+                                    <span class="browser-dot"></span>
+                                    <span class="browser-dot"></span>
+                                    <span class="browser-dot"></span>
+
+                                </div>
+
+
+                                <div class="browser-body">
+
+                                    <div class="browser-nav"></div>
+
+                                    <div class="browser-title"></div>
+
+                                    <div class="browser-text"></div>
+
+                                    <div class="browser-text"></div>
+
+
+                                    <div class="browser-cards">
+
+                                        <div class="browser-card"></div>
+                                        <div class="browser-card"></div>
+                                        <div class="browser-card"></div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONTENT -->
+
+                <div class="col-lg-6">
+
+                    <div class="featured-content">
+
+
+                        <!-- CATEGORY -->
+
+                        <span class="featured-badge">
+
+                            {{ newproject.1.category|upper }}
+
+                        </span>
+
+
+                        <!-- TITLE -->
+
+                        <h3>
+
+                            {{ newproject.1.title }}
+
+                        </h3>
+
+
+                        <!-- DESCRIPTION -->
+
+                        <p>
+
+                            {{ newproject.1.description }}
+
+                        </p>
+
+
+                        <!-- FEATURES -->
+
+                        <ul class="featured-list">
+
+                            <li>
+
+                                <i class="bi bi-check-circle-fill"></i>
+
+                                Professional web application
+
+                            </li>
+
+
+                            <li>
+
+                                <i class="bi bi-check-circle-fill"></i>
+
+                                Database-driven system
+
+                            </li>
+
+
+                            <li>
+
+                                <i class="bi bi-check-circle-fill"></i>
+
+                                Responsive design
+
+                            </li>
+
+
+                            <li>
+
+                                <i class="bi bi-check-circle-fill"></i>
+
+                                Modern user experience
+
+                            </li>
+
+                        </ul>
+
+
+                        <!-- TECHNOLOGIES -->
+
+                        <div class="featured-tech">
+
+                            {% if newproject.1.technologies %}
+
+                                {% for technology in newproject.0.technologies.split %}
+
+                                    <span>
+
+                                        {{ technology }}
+
+                                    </span>
+
+                                {% endfor %}
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- LINKS -->
+
+                        <div class="d-flex flex-wrap gap-3">
+
+
+                            {% if newproject.1.project_url %}
+
+                            <a
+                                href="{{ newproject.1.project_url }}"
+                                target="_blank"
+                                class="btn btn-primary-custom"
+                            >
+
+                                View Live Project
+
+                                <i class="bi bi-arrow-up-right ms-2"></i>
+
+                            </a>
+
+                            {% endif %}
+
+
+                            {% if newproject.1.github_url %}
+
+                            <a
+                                href="{{ newproject.1.github_url }}"
+                                target="_blank"
+                                class="btn btn-outline-custom"
+                            >
+
+                                <i class="bi bi-github me-2"></i>
+
+                                GitHub
+
+                            </a>
+
+                            {% endif %}
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endif %}
+
+
+
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="cta">
+
+    <div class="container">
+
+
+        <div class="cta-content">
+
+
+            <p class="section-label">
+                HAVE A PROJECT IN MIND?
+            </p>
+
+
+            <h2>
+                Let's Build Something Great.
+            </h2>
+
+
+            <p>
+
+                Have an idea for a website or web application?
+                I'm always interested in working on meaningful
+                projects and turning ideas into working products.
+
+            </p>
+
+
+            <div class="d-flex
+                        justify-content-center
+                        flex-wrap
+                        gap-3">
+
+
+                <a href="/contact/"
+                   class="btn btn-primary-custom">
+
+                    Start a Conversation
+
+                    <i class="bi bi-arrow-right ms-2"></i>
+
+                </a>
+
+
+                <a href="/services/"
+                   class="btn btn-primary-custom">
+
+                    View Services
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+{%endblock body%}

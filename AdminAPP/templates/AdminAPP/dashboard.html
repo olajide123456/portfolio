@@ -1,0 +1,891 @@
+{% extends 'AdminAPP/basic.html' %}
+{% load static %}
+{% block title %}Dashboard | Jesse Admin {% endblock title %}
+
+  
+
+
+{% block body %}
+
+
+<!-- =================================================
+     DASHBOARD CONTENT
+================================================== -->
+
+<main class="content">
+
+
+    <!-- PAGE HEADER -->
+
+    <div class="page-heading">
+
+
+        <div>
+
+            <h1>
+
+                Dashboard
+
+            </h1>
+
+
+            <p>
+
+                Welcome back, Jesse. Here's what's happening
+                with your portfolio.
+
+            </p>
+
+        </div>
+
+
+        <a href="/add/add_projects/"
+           class="btn-primary-custom">
+
+            <i class="bi bi-plus-lg me-1"></i>
+
+            Add New Project
+
+        </a>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         STATISTICS
+    ================================================== -->
+
+    <div class="row g-4 mb-4">
+
+
+        <!-- PROJECTS -->
+
+        <div class="col-6 col-xl-3">
+
+            <div class="stat-card">
+
+
+                <div class="stat-top">
+
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-folder"></i>
+
+                    </div>
+
+
+                    <span class="stat-change">
+
+                        +12%
+
+                    </span>
+
+
+                </div>
+
+
+                <div class="stat-number">
+
+                   {{ total }}
+
+                </div>
+
+
+                <div class="stat-label">
+
+                    Total Projects
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- EXPERIENCE -->
+
+        <div class="col-6 col-xl-3">
+
+            <div class="stat-card">
+
+
+                <div class="stat-top">
+
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-briefcase"></i>
+
+                    </div>
+
+
+                    <span class="stat-change">
+
+                        +2
+
+                    </span>
+
+
+                </div>
+
+
+                <div class="stat-number">
+
+                  {{ experience }}
+
+                </div>
+
+
+                <div class="stat-label">
+
+                    Experience Roles
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- MESSAGES -->
+
+        <div class="col-6 col-xl-3">
+
+            <div class="stat-card">
+
+
+                <div class="stat-top">
+
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-envelope"></i>
+
+                    </div>
+
+
+                    <span class="stat-change">
+
+                        +8%
+
+                    </span>
+
+
+                </div>
+
+
+                <div class="stat-number">
+
+                   {{message}}
+
+                </div>
+
+
+                <div class="stat-label">
+
+                    Total Messages
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SKILLS -->
+
+        <div class="col-6 col-xl-3">
+
+            <div class="stat-card">
+
+
+                <div class="stat-top">
+
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-code-slash"></i>
+
+                    </div>
+
+
+                    <span class="stat-change">
+
+                        Active
+
+                    </span>
+
+
+                </div>
+
+
+                <div class="stat-number">
+
+                   {{skill}}
+
+                </div>
+
+
+                <div class="stat-label">
+
+                    Total Skills
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         RECENT PROJECTS
+    ================================================== -->
+
+    <div class="row g-4 mb-4">
+
+
+        <div class="col-xl-8">
+
+
+            <div class="dashboard-card">
+
+
+                <div class="card-header-custom">
+
+
+                    <h3>
+
+                        Recent Projects
+
+                    </h3>
+
+
+                    <a href="/add/projects/"
+                       class="view-all">
+
+                        View All
+
+                    </a>
+
+
+                </div>
+
+
+
+                <div class="card-body-custom p-0">
+
+
+                    <div class="table-responsive">
+
+
+                        <table class="project-table">
+
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+
+                                        Project
+
+                                    </th>
+
+                                    <th>
+
+                                        Technology
+
+                                    </th>
+
+                                    <th>
+
+                                        Status
+
+                                    </th>
+
+                                    <th>
+
+                                        Action
+
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                       {% for project in newproject %}
+                            <tbody>
+
+
+                                <tr>
+
+                                    <td>
+
+                                        <div class="project-name">
+
+                                            <div class="project-icon">
+
+                                                <i class="bi bi-globe"></i>
+
+                                            </div>
+
+                                            {{ project.title }}
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        {{ project.technologies }}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="status completed">
+
+                                            {{ project.status }}
+
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <a href="#"
+                                           class="action-btn">
+
+                                            <i class="bi bi-three-dots"></i>
+
+                                        </a>
+
+                                    </td>
+
+                                </tr>
+
+
+
+                               
+                            </tbody>
+                          {% endfor %}
+
+                        </table>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- QUICK ACTIONS -->
+
+        <div class="col-xl-4">
+
+
+            <div class="dashboard-card">
+
+
+                <div class="card-header-custom">
+
+                    <h3>
+
+                        Quick Actions
+
+                    </h3>
+
+                </div>
+
+
+
+                <div class="card-body-custom">
+
+
+                    <a href="/add/projects/"
+                       class="quick-action">
+
+
+                        <div class="quick-icon">
+
+                            <i class="bi bi-plus-lg"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+
+                                Add Project
+
+                            </strong>
+
+
+                            <span>
+
+                                Create a new portfolio project
+
+                            </span>
+
+                        </div>
+
+
+                    </a>
+
+
+
+                    <a href="/add/experiences/"
+                       class="quick-action">
+
+
+                        <div class="quick-icon">
+
+                            <i class="bi bi-briefcase"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+
+                                Manage Experience
+
+                            </strong>
+
+
+                            <span>
+
+                                Add or edit experience
+
+                            </span>
+
+                        </div>
+
+
+                    </a>
+
+
+
+                    <a href="/add/skills/"
+                       class="quick-action">
+
+
+                        <div class="quick-icon">
+
+                            <i class="bi bi-code-square"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+
+                                Manage Skills
+
+                            </strong>
+
+
+                            <span>
+
+                                Add or edit technologies
+
+                            </span>
+
+                        </div>
+
+
+                    </a>
+
+
+
+                    <a href="/add/messages/"
+                       class="quick-action">
+
+
+                        <div class="quick-icon">
+
+                            <i class="bi bi-envelope"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+
+                                View Messages
+
+                            </strong>
+
+
+                            <span>
+
+                                Read client inquiries
+
+                            </span>
+
+                        </div>
+
+
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         SKILLS
+    ================================================== -->
+
+    <div class="row g-4">
+
+
+        <div class="col-lg-6">
+
+
+            <div class="dashboard-card">
+
+
+                <div class="card-header-custom">
+
+
+                    <h3>
+
+                        Skills Overview
+
+                    </h3>
+
+
+                    <a href="/add/skills/"
+                       class="view-all">
+
+                        Manage Skills
+
+                    </a>
+
+
+                </div>
+
+
+
+                <div class="card-body-custom">
+
+
+                    <div class="progress-item">
+
+
+                        <div class="progress-info">
+
+                            <span>
+
+                                Python / Django
+
+                            </span>
+
+
+                            <strong>
+
+                                90%
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="progress">
+
+                            <div class="progress-bar"
+                                 style="width: 90%;">
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="progress-item">
+
+
+                        <div class="progress-info">
+
+                            <span>
+
+                                HTML / CSS
+
+                            </span>
+
+
+                            <strong>
+
+                                95%
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="progress">
+
+                            <div class="progress-bar"
+                                 style="width: 95%;">
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="progress-item">
+
+
+                        <div class="progress-info">
+
+                            <span>
+
+                                JavaScript
+
+                            </span>
+
+
+                            <strong>
+
+                                80%
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="progress">
+
+                            <div class="progress-bar"
+                                 style="width: 80%;">
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="progress-item">
+
+
+                        <div class="progress-info">
+
+                            <span>
+
+                                PHP
+
+                            </span>
+
+
+                            <strong>
+
+                                70%
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="progress">
+
+                            <div class="progress-bar"
+                                 style="width: 70%;">
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- PORTFOLIO STATUS -->
+
+        <div class="col-lg-6">
+
+
+            <div class="dashboard-card">
+
+
+                <div class="card-header-custom">
+
+                    <h3>
+
+                        Portfolio Status
+
+                    </h3>
+
+                </div>
+
+
+
+                <div class="card-body-custom">
+
+
+                    <div class="status-row">
+
+
+                        <div>
+
+                            <strong>
+
+                                Portfolio Website
+
+                            </strong>
+
+                            <p>
+
+                                Public visibility
+
+                            </p>
+
+                        </div>
+
+
+                        <span class="status completed">
+
+                            Online
+
+                        </span>
+
+
+                    </div>
+
+
+
+                    <div class="status-row">
+
+
+                        <div>
+
+                            <strong>
+
+                                Contact Form
+
+                            </strong>
+
+                            <p>
+
+                                Receiving messages
+
+                            </p>
+
+                        </div>
+
+
+                        <span class="status completed">
+
+                            Active
+
+                        </span>
+
+
+                    </div>
+
+
+
+                    <div class="status-row">
+
+
+                        <div>
+
+                            <strong>
+
+                                Database
+
+                            </strong>
+
+                            <p>
+
+                                Django database
+
+                            </p>
+
+                        </div>
+
+
+                        <span class="status completed">
+
+                            Connected
+
+                        </span>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</main>
+
+
+{% endblock body %}

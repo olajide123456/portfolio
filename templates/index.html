@@ -1,0 +1,1055 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %} Home {% endblock title %}
+
+ {% block body %}
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero"id="home">
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-lg-7">
+            <p class="hero-small">
+                {% if profile %}HELLO, I'M {{ profile.fullname|upper }}{% else %}HELLO, I'M JESSE{% endif %}
+            </p>
+
+            <h1>
+                Web Developer
+                <span>
+                    & Digital Builder
+                </span>
+            </h1>
+
+
+            <p class="hero-description">
+
+                I build modern, responsive and scalable
+                websites and web applications that turn
+                ideas into powerful digital experiences.
+
+            </p>
+
+
+            <div class="d-flex flex-wrap gap-3">
+
+                <a href="/projects/"class="btn btn-primary-custom"> View My Work<i class="bi bi-arrow-right ms-2"></i></a>
+
+                <a href="/contact/"class="btn btn-outline-custom">Let's Work Together</a>
+
+            </div>
+
+
+            <div class="hero-socials">
+
+                <a href="#"
+                   aria-label="GitHub">
+
+                    <i class="bi bi-github"></i>
+
+                </a>
+
+
+                <a href="#"
+                   aria-label="LinkedIn">
+
+                    <i class="bi bi-linkedin"></i>
+
+                </a>
+
+
+                <a href="#"
+                   aria-label="Twitter">
+
+                    <i class="bi bi-twitter-x"></i>
+
+                </a>
+
+
+                <a href="#"
+                   aria-label="Instagram">
+
+                    <i class="bi bi-instagram"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             PROFILE + CODE WINDOW
+        ================================================== -->
+
+        <div class="col-lg-5 text-center">
+
+            <div class="profile-container">
+
+                {% if profile and profile.pic %}
+                    <img src="{{ profile.pic.url }}"
+                         alt="{{ profile.fullname }} - Web Developer"
+                         class="profile-image">
+                {% else %}
+                    <img src="{% static 'images/me.jpeg' %}"
+                         alt="Jesse - Web Developer"
+                         class="profile-image">
+                {% endif %}
+
+                <div class="profile-badge">
+
+                    <i class="bi bi-circle-fill"></i>
+
+                    Available
+
+                </div>
+
+            </div>
+
+
+            <div class="code-window text-start">
+
+                <div class="code-header">
+
+                    <span class="code-dot"></span>
+
+                    <span class="code-dot"></span>
+
+                    <span class="code-dot"></span>
+
+
+                    <span class="code-title">
+
+                        developer.js
+
+                    </span>
+
+                </div>
+
+
+                <div class="code-body">
+
+                    <div>
+
+                        <span class="code-purple">
+                            const
+                        </span>
+
+                        developer =
+
+                        <span class="code-purple">
+                            {
+                        </span>
+
+                    </div>
+
+
+                    <div class="ms-4">
+
+                        name:
+
+                        <span class="code-green">
+                            {% if profile %}"{{ profile.fullname }}"{% else %}"Jesse"{% endif %}
+                        </span>,
+
+                    </div>
+
+
+                    <div class="ms-4">
+
+                        role:
+
+                        <span class="code-green">
+                            {% if profile and profile.title %}"{{ profile.title }}"{% else %}"Web Developer"{% endif %}
+                        </span>,
+
+                    </div>
+
+
+                    <div class="ms-4">
+
+                        backend:
+
+                        <span class="code-green">
+                            "Django"
+                        </span>,
+
+                    </div>
+
+
+                    <div class="ms-4">
+
+                        languages:
+
+                        <span class="code-purple">
+                            [
+                        </span>
+
+                    </div>
+
+
+                    <div class="ms-5">
+
+                        <span class="code-green">
+                            "Python"
+                        </span>,
+
+                    </div>
+
+
+                    <div class="ms-5">
+
+                        <span class="code-green">
+                            "PHP"
+                        </span>,
+
+                    </div>
+
+
+                    <div class="ms-5">
+
+                        <span class="code-green">
+                            "JavaScript"
+                        </span>,
+
+                    </div>
+
+
+                    <div class="ms-5">
+
+                        <span class="code-green">
+                            "HTML"
+                        </span>,
+
+                    </div>
+
+
+                    <div class="ms-5">
+
+                        <span class="code-green">
+                            "CSS"
+                        </span>
+
+                    </div>
+
+
+                    <div class="ms-4">
+
+                        <span class="code-purple">
+                            ]
+                        </span>
+
+                    </div>
+
+
+                    <div class="ms-4">
+
+                        passion:
+
+                        <span class="code-green">
+                            "Building"
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="code-purple">
+                            };
+                        </span>
+
+                    </div>
+
+
+                    <br>
+
+
+                    <div>
+
+                        <span class="code-purple">
+                            developer
+                        </span>.
+
+                        <span class="code-blue">
+                            build
+                        </span>();
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     STATS
+===================================================== -->
+
+<section class="stats">
+
+<div class="container">
+
+    <div class="row text-center g-4">
+
+        <div class="col-6 col-lg-3">
+            <div class="stat-number">
+                {{ project_count }}+
+            </div>
+            <div class="stat-label">
+                Projects Completed
+            </div>
+        </div>
+
+        <div class="col-6 col-lg-3">
+            <div class="stat-number">
+                {{ experience_count }}+
+            </div>
+            <div class="stat-label">
+                Experiences
+            </div>
+        </div>
+
+        <div class="col-6 col-lg-3">
+            <div class="stat-number">
+                {{ skill_count }}+
+            </div>
+            <div class="stat-label">
+                Technologies
+            </div>
+        </div>
+
+        <div class="col-6 col-lg-3">
+            <div class="stat-number">
+                100%
+            </div>
+            <div class="stat-label">
+                Dedication
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- =====================================================
+     ABOUT
+===================================================== -->
+
+<section id="about"
+         class="reveal">
+
+
+<div class="container">
+
+    <div class="mb-5">
+
+        <p class="section-subtitle">
+
+            01. ABOUT ME
+
+        </p>
+
+
+        <h2 class="section-title">
+
+            Developer who loves
+
+            <br>
+
+            building things.
+
+        </h2>
+
+    </div>
+
+
+    <div class="row align-items-center g-5">
+
+        <div class="col-lg-5">
+
+            <div class="about-image">
+
+                <div class="about-code">
+
+                    &lt;/&gt;
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-7">
+
+            <div class="about-content">
+
+                <p>
+                    {% if profile and profile.bio %}
+                        {{ profile.bio }}
+                    {% else %}
+                        I'm a passionate web developer focused
+                        on creating modern, functional and
+                        user-friendly digital experiences.
+                    {% endif %}
+                </p>
+
+
+                <p>
+                    I enjoy taking complex problems and
+                    turning them into simple, elegant and
+                    efficient solutions using modern web
+                    technologies.
+                </p>
+
+
+                <p>
+                    My main backend development experience
+                    is with Python and Django. I have also
+                    learned PHP and understand the
+                    fundamentals of server-side web
+                    development.
+                </p>
+
+
+                <p>
+                    From responsive frontend interfaces to
+                    powerful backend systems, I focus on
+                    writing clean code and building
+                    applications that solve real-world
+                    problems.
+                </p>
+
+
+                <ul class="about-list">
+
+                    <li>
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                        Clean and maintainable code
+
+                    </li>
+
+
+                    <li>
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                        Responsive web design
+
+                    </li>
+
+
+                    <li>
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                        Python & Django development
+
+                    </li>
+
+
+                    <li>
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                        PHP programming knowledge
+
+                    </li>
+
+
+                    <li>
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                        Database development
+
+                    </li>
+
+
+                    <li>
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                        Problem-solving mindset
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     SERVICES
+===================================================== -->
+
+<section id="services"
+         class="reveal">
+
+
+<div class="container">
+
+    <div class="mb-5">
+
+        <h2 class="section-title">
+            What I Can Do For You
+        </h2>
+
+    </div>
+
+
+    <div class="row g-4">
+
+
+        <div class="col-md-6 col-lg-3">
+
+            <div class="service-card">
+
+                <span class="service-number">
+                    01
+                </span>
+
+
+                <i class="bi bi-window-stack"></i>
+
+
+                <h4>
+                    Web Development
+                </h4>
+
+
+                <p>
+
+                    Modern, responsive websites and
+                    web applications built around
+                    your goals.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="col-md-6 col-lg-3">
+
+            <div class="service-card">
+
+                <span class="service-number">
+                    02
+                </span>
+
+
+                <i class="bi bi-server"></i>
+
+
+                <h4>
+                    Backend Development
+                </h4>
+
+
+                <p>
+
+                    Developing backend systems using
+                    Python, Django and database
+                    technologies.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="col-md-6 col-lg-3">
+
+            <div class="service-card">
+
+                <span class="service-number">
+                    03
+                </span>
+
+
+                <i class="bi bi-phone"></i>
+
+
+                <h4>
+                    Responsive Design
+                </h4>
+
+
+                <p>
+
+                    Websites that look and work
+                    perfectly across phones,
+                    tablets and desktops.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="col-md-6 col-lg-3">
+
+            <div class="service-card">
+
+                <span class="service-number">
+                    04
+                </span>
+
+
+                <i class="bi bi-tools"></i>
+
+
+                <h4>
+                    Website Maintenance
+                </h4>
+
+
+                <p>
+
+                    Bug fixing, optimization,
+                    updates and continuous
+                    improvements.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     PROJECTS
+===================================================== -->
+
+<section id="projects"
+         class="section-dark reveal">
+
+
+<div class="container">
+
+    <div class="d-flex justify-content-between
+                align-items-end flex-wrap mb-5">
+
+        <div>
+
+
+            <h2 class="section-title mb-0">
+                Featured Projects
+            </h2>
+
+        </div>
+
+        <a href="/contact/"
+           class="btn btn-outline-custom mt-3 mt-lg-0">
+
+            Start A Project
+
+            <i class="bi bi-arrow-up-right ms-2"></i>
+
+        </a>
+
+    </div>
+ <div class="text-warning m-4">
+     <a href="/projects/"
+           class="btn btn-outline-custom mt-3 mt-lg-0">
+
+            View More Projects
+
+            <i class="bi bi-arrow-up-right ms-2"></i>
+
+        </a>
+</div>
+    <div class="row g-4">
+
+        {% for project in projects %}
+
+        <div class="col-lg-6">
+
+            <div class="project-card">
+
+                <div class="project-image">
+
+                    {% if project.image %}
+                        <img src="{{ project.image.url }}"
+                             alt="{{ project.title }}"
+                             class="img-fluid w-100 h-100"
+                             style="object-fit: cover;">
+                    {% else %}
+                        <i class="bi bi-code-slash"></i>
+                    {% endif %}
+
+                </div>
+
+
+                <div class="project-content">
+
+                    <div class="d-flex
+                                justify-content-between
+                                align-items-center">
+
+                        <span class="project-category">
+                            {{ project.category }}
+                        </span>
+
+                        <div class="project-links">
+
+                            {% if project.github_url %}
+                            <a href="{{ project.github_url }}"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               aria-label="GitHub">
+
+                                <i class="bi bi-github"></i>
+
+                            </a>
+                            {% endif %}
+
+                            {% if project.project_url %}
+                            <a href="{{ project.project_url }}"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               aria-label="Live project">
+
+                                <i class="bi bi-box-arrow-up-right"></i>
+
+                            </a>
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+
+                    <h4>
+                        {{ project.title }}
+                    </h4>
+
+
+                    <p>
+                        {{ project.description }}
+                    </p>
+
+
+                    <div class="project-tags">
+
+                       
+
+                        <span>{{ project.technologies }}</span>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="col-12 text-center">
+            <p>No projects available yet.</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- =====================================================
+     EXPERIENCE
+===================================================== -->
+
+<section id="experience"
+         class="reveal">
+
+
+<div class="container">
+
+    <div class="text-center mb-5">
+
+        <p class="section-subtitle">
+            05. EXPERIENCE
+        </p>
+
+        <h2 class="section-title">
+            My Development Journey
+        </h2>
+
+    </div>
+
+
+    <div class="timeline">
+
+        {% for experience in experiences %}
+
+        <div class="timeline-item">
+
+            <div class="timeline-dot"></div>
+
+
+            <div class="timeline-date">
+
+                {{ experience.start_date|date:"Y" }}
+
+                —
+
+                {% if experience.end_date %}
+                    {{ experience.end_date|date:"Y" }}
+                {% else %}
+                    PRESENT
+                {% endif %}
+
+            </div>
+
+
+            <h4>
+                {{ experience.title }}
+            </h4>
+
+
+            <div class="timeline-company">
+                {{ experience.company }}
+            </div>
+
+
+            <p>
+                {{ experience.description }}
+            </p>
+
+        </div>
+
+        {% empty %}
+
+        <div class="text-center">
+            <p>No experience available yet.</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- =====================================================
+     TESTIMONIALS
+===================================================== -->
+
+<section class="section-dark reveal">
+
+
+<div class="container">
+
+    <div class="text-center mb-5">
+
+        <p class="section-subtitle">
+
+            06. TESTIMONIALS
+
+        </p>
+
+
+        <h2 class="section-title">
+
+            What People Say
+
+        </h2>
+
+    </div>
+
+
+    <div class="row g-4">
+
+
+        <div class="col-md-4">
+
+            <div class="testimonial-card">
+
+                <div class="quote">
+
+                    <i class="bi bi-quote"></i>
+
+                </div>
+
+
+                <p>
+
+                    Jesse delivered a clean and professional
+                    website that exceeded our expectations.
+
+                </p>
+
+
+                <div class="testimonial-author">
+
+                    <div class="author-avatar">
+                        JD
+                    </div>
+
+
+                    <div class="author-info">
+
+                        <strong>
+                            John Doe
+                        </strong>
+
+
+                        <span>
+                            Business Owner
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="col-md-4">
+
+            <div class="testimonial-card">
+
+                <div class="quote">
+
+                    <i class="bi bi-quote"></i>
+
+                </div>
+
+
+                <p>
+
+                    Excellent communication, attention to
+                    detail and strong technical skills.
+
+                </p>
+
+
+                <div class="testimonial-author">
+
+                    <div class="author-avatar">
+                        AS
+                    </div>
+
+
+                    <div class="author-info">
+
+                        <strong>
+                            Alex Smith
+                        </strong>
+
+
+                        <span>
+                            Project Manager
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="col-md-4">
+
+            <div class="testimonial-card">
+
+                <div class="quote">
+
+                    <i class="bi bi-quote"></i>
+
+                </div>
+
+
+                <p>
+
+                    The application was fast, responsive
+                    and exactly what we needed for our
+                    project.
+
+                </p>
+
+
+                <div class="testimonial-author">
+
+                    <div class="author-avatar">
+                        MK
+                    </div>
+
+
+                    <div class="author-info">
+
+                        <strong>
+                            Mike Kelly
+                        </strong>
+
+
+                        <span>
+                            Entrepreneur
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+</section>
+
+
+
+ {% endblock body %}

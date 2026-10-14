@@ -1,0 +1,661 @@
+{% extends 'AdminAPP/basic.html' %}
+{% load static %}
+{% block title %}Add Experience | Jesse Admin{% endblock title %}
+
+
+{% block body %}
+
+
+<!-- ==========================================
+     PAGE CONTENT
+========================================== -->
+
+<div class="content-wrapper">
+    <!-- ==========================================
+         BREADCRUMB
+    ========================================== -->
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+
+                <a href="/add/dashboard/">
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+
+            <li class="breadcrumb-item">
+
+                <a href="/add/experiences/">
+
+                    Experience
+
+                </a>
+
+            </li>
+
+
+            <li class="breadcrumb-item active">
+
+                Add Experience
+
+            </li>
+
+
+        </ol>
+
+    </nav>
+
+
+
+    <!-- ==========================================
+         FORM CARD
+    ========================================== -->
+
+    <div class="form-card">
+
+
+        <!-- ==========================================
+             FORM HEADER
+        ========================================== -->
+
+        <div class="form-card-header">
+
+
+            <h4>
+
+                Experience Information
+
+            </h4>
+
+
+            <p>
+
+                Add your professional role, responsibilities,
+                technologies and work details.
+
+            </p>
+
+
+        </div>
+
+
+
+        <!-- ==========================================
+             EXPERIENCE FORM
+        ========================================== -->
+
+        <form method="POST">
+
+            {% csrf_token %}
+            <!-- ==========================================
+                 BASIC INFORMATION
+            ========================================== -->
+            <div class="form-section-title">
+
+                Basic Information
+
+            </div>
+
+
+            <div class="row g-4 mb-5">
+
+
+                <!-- JOB TITLE -->
+
+                <div class="col-md-6">
+
+
+                    <label class="form-label">
+
+                        Job Title
+
+                        <span class="required">
+
+                            *
+
+                        </span>
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        name="title"
+                        class="form-control"
+                        placeholder="e.g. Full-Stack Web Developer"
+                        required>
+
+
+                </div>
+
+
+
+                <!-- COMPANY -->
+
+                <div class="col-md-6">
+
+
+                    <label class="form-label">
+
+                        Company / Organization
+
+                        <span class="required">
+
+                            *
+
+                        </span>
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        name="company"
+                        class="form-control"
+                        placeholder="e.g. Freelance / Independent Developer"
+                        required>
+
+
+                </div>
+
+
+
+                <!-- START DATE -->
+
+                <div class="col-md-4">
+
+
+                    <label class="form-label">
+
+                        Start Date
+
+                        <span class="required">
+
+                            *
+
+                        </span>
+
+                    </label>
+
+
+                    <input
+                        type="month"
+                        name="start_date"
+                        class="form-control"
+                        required>
+
+
+                </div>
+
+
+
+                <!-- END DATE -->
+
+                <div class="col-md-4">
+
+
+                    <label class="form-label">
+
+                        End Date
+
+                    </label>
+
+
+                    <input
+                        type="month"
+                        name="end_date"
+                        class="form-control">
+
+
+                    <div class="form-text">
+
+                        Leave empty if this is your current role.
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- EMPLOYMENT STATUS -->
+
+                <div class="col-md-4">
+
+
+                    <label class="form-label">
+
+                        Employment Status
+
+                    </label>
+
+
+                    <select
+                        name="employment_status"
+                        class="form-select">
+
+
+                        <option value="current">
+
+                            Current Position
+
+                        </option>
+                           <option value="Ongoing">
+
+                            Ongoing
+
+                        </option>
+
+                        <option value="completed">
+
+                            Completed
+
+                        </option>
+
+
+                    </select>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 EXPERIENCE DESCRIPTION
+            ========================================== -->
+
+            <div class="form-section-title">
+
+                Experience Description
+
+            </div>
+
+
+            <div class="mb-5">
+
+
+                <label class="form-label">
+
+                    Professional Summary
+
+                    <span class="required">
+
+                        *
+
+                    </span>
+
+                </label>
+
+
+                <textarea
+                    name="description"
+                    class="form-control"
+                    placeholder="Describe your role and the work you performed..."
+                    required></textarea>
+
+
+                <div class="form-text">
+
+                    Provide a brief description of your
+                    responsibilities and contributions.
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 RESPONSIBILITIES
+            ========================================== -->
+
+            <div class="form-section-title">
+
+                Responsibilities
+
+            </div>
+
+
+            <div class="dynamic-box mb-5">
+                <div id="responsibilityContainer">
+                    <!-- RESPONSIBILITY -->
+
+                    <div class="responsibility-item">
+                        <input
+                            type="text"
+                            name="responsibilities"
+                            class="form-control"
+                            placeholder="e.g. Developed responsive websites and web applications">
+
+                        <button
+                            type="button"
+                            class="remove-btn"
+                            onclick="removeResponsibility(this)">
+                            <i class="bi bi-trash"></i>
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- ADD RESPONSIBILITY -->
+
+                <button
+                    type="button"
+                    class="add-item-btn"
+                    onclick="addResponsibility()">
+                    <i class="bi bi-plus-circle me-1"></i>
+                    Add Another Responsibility
+
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 TECHNOLOGIES
+            ========================================== -->
+
+            <div class="form-section-title">
+
+                Technologies & Tools
+
+            </div>
+
+
+            <div class="row g-4 mb-5">
+
+
+                <!-- TECHNOLOGY INPUT -->
+
+                <div class="col-lg-8">
+
+
+                    <label class="form-label">
+
+                        Technologies Used
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        name="technologies"
+                        class="form-control"
+                        placeholder="Python, Django, PHP, MySQL, HTML, CSS">
+
+
+                    <div class="form-text">
+
+                        Separate each technology using commas.
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- TECHNOLOGY EXAMPLE -->
+
+                <div class="col-lg-4">
+
+
+                    <div class="tech-info">
+
+
+                        <strong>
+
+                            Example:
+
+                        </strong>
+
+
+                        <br>
+
+
+                        Python, Django, PHP,
+                        MySQL, JavaScript,
+                        Bootstrap
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 DISPLAY SETTINGS
+            ========================================== -->
+
+            <div class="form-section-title">
+
+                Display Settings
+
+            </div>
+
+
+            <div class="status-box mb-5">
+
+
+                <div class="row g-4 align-items-center">
+
+
+                    <!-- VISIBILITY -->
+
+                    <div class="col-md-6">
+
+
+                        <label class="form-label">
+
+                            Experience Visibility
+
+                        </label>
+
+
+                        <select
+                            name="visibility"
+                            class="form-select">
+
+
+                            <option value="published">
+
+                                Published
+
+                            </option>
+
+
+                            <option value="draft">
+
+                                Draft
+
+                            </option>
+
+
+                        </select>
+
+
+                    </div>
+
+
+
+                    <!-- DISPLAY ORDER -->
+
+                    <div class="col-md-6">
+
+
+                        <label class="form-label">
+
+                            Display Order
+
+                        </label>
+
+
+                        <input
+                            type="number"
+                            name="display_order"
+                            class="form-control"
+                            value="1"
+                            min="1">
+
+
+                        <div class="form-text">
+
+                            Lower numbers appear first.
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 FORM BUTTONS
+            ========================================== -->
+
+            <div class="d-flex justify-content-end flex-wrap gap-3">
+                <a
+                    href="/add/experiences/"
+                    class="btn-cancel">
+                    Cancel
+                </a>
+
+
+
+                <button
+                    type="submit"
+                    class="btn-primary-custom">
+                    <i class="bi bi-plus-circle me-2"></i>
+                    Add Experience
+                </button>
+
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- ==========================================
+     JAVASCRIPT
+========================================== -->
+
+<script>
+
+
+    /* ==========================================
+       ADD RESPONSIBILITY
+    ========================================== */
+
+    function addResponsibility() {
+
+        const container =
+            document.getElementById(
+                "responsibilityContainer"
+            );
+
+
+        const item =
+            document.createElement("div");
+
+
+        item.classList.add(
+            "responsibility-item"
+        );
+
+
+        item.innerHTML = `
+
+            <input
+                type="text"
+                name="responsibilities"
+                class="form-control"
+                placeholder="Enter responsibility">
+
+
+            <button
+                type="button"
+                class="remove-btn"
+                onclick="removeResponsibility(this)">
+
+
+                <i class="bi bi-trash"></i>
+
+
+            </button>
+
+        `;
+
+
+        container.appendChild(item);
+
+    }
+
+
+
+    /* ==========================================
+       REMOVE RESPONSIBILITY
+    ========================================== */
+
+    function removeResponsibility(button) {
+
+
+        const container =
+            document.getElementById(
+                "responsibilityContainer"
+            );
+
+
+        const items =
+            container.querySelectorAll(
+                ".responsibility-item"
+            );
+
+
+        if (items.length > 1) {
+
+            button.parentElement.remove();
+
+        }
+
+    }
+
+
+</script>
+
+
+{% endblock body %}

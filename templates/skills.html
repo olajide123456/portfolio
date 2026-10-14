@@ -1,0 +1,1036 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %} Skills {% endblock title %}
+
+ {% block body %}
+ <!-- =====================================================
+     PAGE HERO
+===================================================== -->
+
+<section class="page-hero">
+
+    <div class="container">
+
+
+        <p class="page-label">
+            02. SKILLS & TECHNOLOGIES
+        </p>
+
+
+        <h1>
+
+            Tools I Use
+            <span>To Build.</span>
+
+        </h1>
+
+
+        <p>
+
+            From frontend interfaces to backend architecture,
+            I use modern technologies and development practices
+            to create reliable and scalable web applications.
+
+        </p>
+
+
+        <nav aria-label="breadcrumb">
+
+            <ol class="breadcrumb">
+
+                <li class="breadcrumb-item">
+
+                    <a href="/">
+                        Home
+                    </a>
+
+                </li>
+
+                <li class="breadcrumb-item active">
+
+                    Skills
+
+                </li>
+
+            </ol>
+
+        </nav>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SKILL CATEGORIES
+===================================================== -->
+
+<section>
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <p class="section-label">
+                CORE SKILLS
+            </p>
+
+            <h2 class="section-title">
+                My Technical Expertise
+            </h2>
+
+            <p class="section-description mx-auto">
+
+                I work across different areas of web development,
+                from designing interfaces to developing backend
+                systems and managing application data.
+
+            </p>
+
+        </div>
+
+
+        {% regroup newskill by category as skill_categories %}
+
+
+        <div class="row g-4">
+
+
+            {% for category in skill_categories %}
+
+
+            <!-- =================================================
+                 CATEGORY CARD
+            ================================================== -->
+
+            <div class="col-lg-4">
+
+                <div class="category-card">
+
+
+                    <!-- CATEGORY ICON -->
+
+                    <div class="category-icon">
+
+                        {% if category.grouper == "Frontend Development" %}
+
+                            <i class="bi bi-code-slash"></i>
+
+                        {% elif category.grouper == "Backend Development" %}
+
+                            <i class="bi bi-server"></i>
+
+                        {% elif category.grouper == "Database & Data" %}
+
+                            <i class="bi bi-database"></i>
+
+                        {% elif category.grouper == "Database" %}
+
+                            <i class="bi bi-database"></i>
+
+                        {% elif category.grouper == "Tools & Technologies" %}
+
+                            <i class="bi bi-tools"></i>
+
+                        {% else %}
+
+                            <i class="bi bi-code-square"></i>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- CATEGORY NAME -->
+
+                    <h3>
+
+                        {{ category.grouper }}
+
+                    </h3>
+
+
+                    <!-- CATEGORY DESCRIPTION -->
+
+                    {% if category.grouper == "Frontend Development" %}
+
+                        <p>
+
+                            Creating responsive, accessible and
+                            interactive user interfaces.
+
+                        </p>
+
+                    {% elif category.grouper == "Backend Development" %}
+
+                        <p>
+
+                            Building server-side applications,
+                            backend functionality and web systems.
+
+                        </p>
+
+                    {% elif category.grouper == "Database & Data" %}
+
+                        <p>
+
+                            Designing, querying and managing
+                            application databases.
+
+                        </p>
+
+                    {% elif category.grouper == "Database" %}
+                        <p>
+                            Designing, querying and managing
+                            application databases.
+                        </p>
+
+                    {% else %}
+
+                        <p>
+
+                            Using modern technologies and tools
+                            to build reliable web applications.
+
+                        </p>
+
+                    {% endif %}
+
+
+
+                    <!-- =================================================
+                         SKILLS INSIDE CATEGORY
+                    ================================================== -->
+
+                    {% for skill in category.list %}
+
+
+                    <div class="technology">
+
+
+                        <div class="technology-header">
+
+
+                            <span class="technology-name">
+
+                                {% if skill.icon %}
+
+                                    <i class="{{ skill.icon }} me-2"></i>
+
+                                {% endif %}
+
+                                {{ skill.name }}
+
+                            </span>
+
+
+                            <span class="technology-percent">
+
+                                {{ skill.proficiency }}%
+
+                            </span>
+
+
+                        </div>
+
+
+
+                        <div class="progress">
+
+                            <div
+                                class="progress-bar"
+                                role="progressbar"
+                                style="width: {{ skill.proficiency }}%;"
+                                aria-valuenow="{{ skill.proficiency }}"
+                                aria-valuemin="0"
+                                aria-valuemax="100">
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+            </div>
+
+
+            {% empty %}
+
+
+            <!-- NO SKILLS -->
+
+            <div class="col-12">
+
+                <div class="text-center">
+
+                    <p>
+                        No skills available yet.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            {% endfor %}
+
+
+        </div>
+
+    </div>
+
+</section>
+<!-- =====================================================
+     TECHNOLOGIES
+===================================================== -->
+
+<section class="dark-section">
+
+    <div class="container">
+
+
+        <div class="text-center mb-5">
+
+            <p class="section-label">
+                TECHNOLOGY STACK
+            </p>
+
+            <h2 class="section-title">
+                Technologies I Work With
+            </h2>
+
+            <p class="dark-description mx-auto">
+
+                These are some of the technologies and tools
+                I have learned and use throughout the development
+                process.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="row g-3">
+
+
+            <!-- HTML -->
+
+            <div class="col-6 col-md-4 col-lg-2">
+
+                <div class="tech-box">
+
+                    <i class="bi bi-filetype-html"></i>
+
+                    <h5>
+                        HTML5
+                    </h5>
+
+                    <small>
+                        Frontend
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- CSS -->
+
+            <div class="col-6 col-md-4 col-lg-2">
+
+                <div class="tech-box">
+
+                    <i class="bi bi-filetype-css"></i>
+
+                    <h5>
+                        CSS3
+                    </h5>
+
+                    <small>
+                        Styling
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- JAVASCRIPT -->
+
+            <div class="col-6 col-md-4 col-lg-2">
+
+                <div class="tech-box">
+
+                    <i class="bi bi-filetype-js"></i>
+
+                    <h5>
+                        JavaScript
+                    </h5>
+
+                    <small>
+                        Frontend
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- BOOTSTRAP -->
+
+            <div class="col-6 col-md-4 col-lg-2">
+
+                <div class="tech-box">
+
+                    <i class="bi bi-bootstrap"></i>
+
+                    <h5>
+                        Bootstrap
+                    </h5>
+
+                    <small>
+                        UI Framework
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- PYTHON -->
+
+            <div class="col-6 col-md-4 col-lg-2">
+
+                <div class="tech-box">
+
+                    <i class="bi bi-code-square"></i>
+
+                    <h5>
+                        Python
+                    </h5>
+
+                    <small>
+                        Programming
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- DJANGO -->
+
+            <div class="col-6 col-md-4 col-lg-2">
+
+                <div class="tech-box">
+
+                    <i class="bi bi-terminal"></i>
+
+                    <h5>
+                        Django
+                    </h5>
+
+                    <small>
+                        Framework
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- PHP -->
+
+            <div class="col-6 col-md-4 col-lg-2">
+
+                <div class="tech-box">
+
+                    <i class="bi bi-filetype-php"></i>
+
+                    <h5>
+                        PHP
+                    </h5>
+
+                    <small>
+                        Programming
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- SQL -->
+
+            <div class="col-6 col-md-4 col-lg-2">
+
+                <div class="tech-box">
+
+                    <i class="bi bi-database"></i>
+
+                    <h5>
+                        SQL
+                    </h5>
+
+                    <small>
+                        Database
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- GIT -->
+
+            <div class="col-6 col-md-4 col-lg-2">
+
+                <div class="tech-box">
+
+                    <i class="bi bi-git"></i>
+
+                    <h5>
+                        Git
+                    </h5>
+
+                    <small>
+                        Version Control
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- GITHUB -->
+
+            <div class="col-6 col-md-4 col-lg-2">
+
+                <div class="tech-box">
+
+                    <i class="bi bi-github"></i>
+
+                    <h5>
+                        GitHub
+                    </h5>
+
+                    <small>
+                        Collaboration
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- REST API -->
+
+            <div class="col-6 col-md-4 col-lg-2">
+
+                <div class="tech-box">
+
+                    <i class="bi bi-braces"></i>
+
+                    <h5>
+                        REST API
+                    </h5>
+
+                    <small>
+                        Backend
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- JSON -->
+
+            <div class="col-6 col-md-4 col-lg-2">
+
+                <div class="tech-box">
+
+                    <i class="bi bi-code-square"></i>
+
+                    <h5>
+                        JSON
+                    </h5>
+
+                    <small>
+                        Data
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- VS CODE -->
+
+            <div class="col-6 col-md-4 col-lg-2">
+
+                <div class="tech-box">
+
+                    <i class="bi bi-window"></i>
+
+                    <h5>
+                        VS Code
+                    </h5>
+
+                    <small>
+                        Development
+                    </small>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     DEVELOPMENT PROCESS
+===================================================== -->
+
+<section>
+
+    <div class="container">
+
+
+        <div class="text-center mb-5">
+
+            <p class="section-label">
+                DEVELOPMENT PROCESS
+            </p>
+
+            <h2 class="section-title">
+                How I Build Projects
+            </h2>
+
+            <p class="section-description mx-auto">
+
+                Good development is more than knowing programming
+                languages. It requires a structured approach to
+                solving problems.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="row g-4">
+
+
+            <!-- STEP 01 -->
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="process-card">
+
+                    <span class="process-number">
+                        01 / DISCOVER
+                    </span>
+
+                    <h4>
+                        Understand
+                    </h4>
+
+                    <p>
+
+                        Understand the requirements, users,
+                        business goals and problems the project
+                        needs to solve.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- STEP 02 -->
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="process-card">
+
+                    <span class="process-number">
+                        02 / PLAN
+                    </span>
+
+                    <h4>
+                        Design
+                    </h4>
+
+                    <p>
+
+                        Plan the application structure,
+                        database, interface and technologies
+                        required for the project.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- STEP 03 -->
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="process-card">
+
+                    <span class="process-number">
+                        03 / BUILD
+                    </span>
+
+                    <h4>
+                        Develop
+                    </h4>
+
+                    <p>
+
+                        Write clean and maintainable code while
+                        implementing frontend, backend and
+                        database functionality.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- STEP 04 -->
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="process-card">
+
+                    <span class="process-number">
+                        04 / IMPROVE
+                    </span>
+
+                    <h4>
+                        Test & Optimize
+                    </h4>
+
+                    <p>
+
+                        Test functionality, fix issues, improve
+                        performance and make the application
+                        ready for users.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SOFT SKILLS
+===================================================== -->
+
+<section class="soft-section">
+
+    <div class="container">
+
+
+        <div class="text-center mb-5">
+
+            <p class="section-label">
+                BEYOND CODE
+            </p>
+
+            <h2 class="section-title">
+                Professional Skills
+            </h2>
+
+            <p class="section-description mx-auto">
+
+                Technical ability is important, but communication,
+                curiosity and problem-solving are equally valuable.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="row g-4">
+
+
+            <!-- PROBLEM SOLVING -->
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="soft-skill">
+
+                    <div class="soft-icon">
+
+                        <i class="bi bi-lightbulb"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h5>
+                            Problem Solving
+                        </h5>
+
+                        <p>
+
+                            Breaking complex problems into
+                            practical solutions.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- COMMUNICATION -->
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="soft-skill">
+
+                    <div class="soft-icon">
+
+                        <i class="bi bi-chat-dots"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h5>
+                            Communication
+                        </h5>
+
+                        <p>
+
+                            Clearly communicating ideas,
+                            progress and technical decisions.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- LEARNING -->
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="soft-skill">
+
+                    <div class="soft-icon">
+
+                        <i class="bi bi-book"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h5>
+                            Continuous Learning
+                        </h5>
+
+                        <p>
+
+                            Constantly improving skills and
+                            learning new technologies.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- TEAMWORK -->
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="soft-skill">
+
+                    <div class="soft-icon">
+
+                        <i class="bi bi-people"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h5>
+                            Teamwork
+                        </h5>
+
+                        <p>
+
+                            Collaborating effectively with
+                            designers, developers and clients.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- TIME MANAGEMENT -->
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="soft-skill">
+
+                    <div class="soft-icon">
+
+                        <i class="bi bi-clock"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h5>
+                            Time Management
+                        </h5>
+
+                        <p>
+
+                            Organizing tasks and delivering
+                            projects efficiently.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ATTENTION TO DETAIL -->
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="soft-skill">
+
+                    <div class="soft-icon">
+
+                        <i class="bi bi-stars"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h5>
+                            Attention to Detail
+                        </h5>
+
+                        <p>
+
+                            Paying attention to usability,
+                            quality and maintainability.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="cta">
+
+    <div class="container">
+
+        <div class="cta-content">
+
+
+            <p class="section-label">
+                LET'S WORK TOGETHER
+            </p>
+
+
+            <h2>
+                Have a Project in Mind?
+            </h2>
+
+
+            <p>
+
+                If you need a professional website or web
+                application, let's discuss your idea and
+                build something useful together.
+
+            </p>
+
+
+            <a href="/contact/"
+               class="btn btn-primary-custom">
+
+                Start a Conversation
+
+                <i class="bi bi-arrow-right ms-2"></i>
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock body%}

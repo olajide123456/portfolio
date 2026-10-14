@@ -1,0 +1,956 @@
+{% extends 'AdminAPP/basic.html' %}
+{% load static %}
+{% block title %}Edit Project | Jesse Admin{% endblock title %}
+
+{% block body %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+<!-- =====================================================
+     EDIT PROJECT PAGE
+===================================================== -->
+
+<section class="edit-project-page">
+
+    <div class="container">
+
+
+        <!-- =================================================
+             BREADCRUMB
+        ================================================== -->
+
+        <div class="page-breadcrumb">
+
+            <a href="{% url 'AdminAPP:dashboard' %}">
+                Dashboard
+            </a>
+
+            <i class="bi bi-chevron-right"></i>
+
+            <a href="{% url 'AdminAPP:projects' %}">
+                Projects
+            </a>
+
+            <i class="bi bi-chevron-right"></i>
+
+            <span class="active">
+                Edit Project
+            </span>
+
+        </div>
+
+
+        <!-- =================================================
+             PAGE HEADER
+        ================================================== -->
+
+        <div class="page-header">
+
+            <div class="page-header-content">
+
+                <h1>
+                    Edit Project
+                </h1>
+
+                <p>
+                    Update your project information, technologies,
+                    links and display settings.
+                </p>
+
+            </div>
+
+
+            <a
+                href="{% url 'AdminAPP:projects' %}"
+                class="back-btn">
+
+                <i class="bi bi-arrow-left"></i>
+
+                Back to Projects
+
+            </a>
+
+        </div>
+
+
+        <!-- =================================================
+             MAIN LAYOUT
+        ================================================== -->
+
+        <div class="project-edit-layout">
+
+
+            <!-- =================================================
+                 LEFT — FORM
+            ================================================== -->
+
+            <div class="edit-card">
+
+
+                <div class="edit-card-header">
+
+                    <div class="edit-card-header-left">
+
+                        <div class="edit-card-icon">
+
+                            <i class="bi bi-pencil-square"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Project Information
+                            </h3>
+
+                            <p>
+                                Modify the details of your project
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="edit-card-body">
+
+
+                    <!-- =================================================
+                         FORM
+                    ================================================== -->
+
+                    <form
+                        method="POST"
+                        enctype="multipart/form-data">
+
+                        {% csrf_token %}
+
+
+                        <!-- =================================================
+                             BASIC INFORMATION
+                        ================================================== -->
+
+                        <div class="form-section">
+
+                            <div class="form-section-title">
+
+                                <i class="bi bi-info-circle"></i>
+
+                                <h4>
+                                    Basic Information
+                                </h4>
+
+                            </div>
+
+
+                            <div class="row g-4">
+
+
+                                <!-- PROJECT TITLE -->
+
+                                <div class="col-12">
+
+                                    <label class="form-label">
+
+                                        Project Title
+
+                                        <span class="required">
+                                            *
+                                        </span>
+
+                                    </label>
+
+
+                                    <input
+                                        type="text"
+                                        name="title"
+                                        class="form-control"
+                                        value="{{ project.title }}"
+                                        placeholder="Enter project title"
+                                        required>
+
+                                </div>
+
+
+                                <!-- CATEGORY -->
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+
+                                        Project Category
+
+                                        <span class="required">
+                                            *
+                                        </span>
+
+                                    </label>
+
+
+                                    <select
+                                        name="category"
+                                        class="form-select"
+                                        required>
+
+                                        <option value="">
+                                            Select Category
+                                        </option>
+
+
+                                        <option
+                                            value="Web Development"
+                                            {% if project.category == "Web Development" %}
+                                                selected
+                                            {% endif %}>
+
+                                            Web Development
+
+                                        </option>
+
+
+                                        <option
+                                            value="E-Commerce"
+                                            {% if project.category == "E-Commerce" %}
+                                                selected
+                                            {% endif %}>
+
+                                            E-Commerce
+
+                                        </option>
+
+
+                                        <option
+                                            value="Business Website"
+                                            {% if project.category == "Business Website" %}
+                                                selected
+                                            {% endif %}>
+
+                                            Business Website
+
+                                        </option>
+
+
+                                        <option
+                                            value="Portfolio"
+                                            {% if project.category == "Portfolio" %}
+                                                selected
+                                            {% endif %}>
+
+                                            Portfolio
+
+                                        </option>
+
+
+                                        <option
+                                            value="Hotel System"
+                                            {% if project.category == "Hotel System" %}
+                                                selected
+                                            {% endif %}>
+
+                                            Hotel System
+
+                                        </option>
+
+
+                                        <option
+                                            value="Other"
+                                            {% if project.category == "Other" %}
+                                                selected
+                                            {% endif %}>
+
+                                            Other
+
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- DISPLAY ORDER -->
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+
+                                        Display Order
+
+                                    </label>
+
+
+                                    <div class="order-input">
+
+                                        <input
+                                            type="number"
+                                            name="display_order"
+                                            class="form-control"
+                                            value="{{ project.display_order }}"
+                                            min="1">
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- DESCRIPTION -->
+
+                                <div class="col-12">
+
+                                    <label class="form-label">
+
+                                        Project Description
+
+                                        <span class="required">
+                                            *
+                                        </span>
+
+                                    </label>
+
+
+                                    <textarea
+                                        name="description"
+                                        class="form-control"
+                                        placeholder="Describe your project..."
+                                        required>{{ project.description }}</textarea>
+
+
+                                    <div class="input-help">
+
+                                        Give a short and professional
+                                        description of the project.
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- =================================================
+                             TECHNOLOGIES
+                        ================================================== -->
+
+                        <div class="form-section">
+
+                            <div class="form-section-title">
+
+                                <i class="bi bi-code-slash"></i>
+
+                                <h4>
+                                    Technologies & Tools
+                                </h4>
+
+                            </div>
+
+
+                            <label class="form-label">
+
+                                Technologies
+
+                            </label>
+
+
+                            <div class="technology-input-wrapper">
+
+                                <i class="bi bi-stack"></i>
+
+                                <input
+                                    type="text"
+                                    name="technologies"
+                                    class="form-control"
+                                    value="{{ project.technologies }}"
+                                    placeholder="HTML5, CSS3, JavaScript, Django">
+
+                            </div>
+
+
+                            <div class="input-help">
+
+                                Separate each technology with a comma.
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- =================================================
+                             PROJECT LINKS
+                        ================================================== -->
+
+                        <div class="form-section">
+
+                            <div class="form-section-title">
+
+                                <i class="bi bi-link-45deg"></i>
+
+                                <h4>
+                                    Project Links
+                                </h4>
+
+                            </div>
+
+
+                            <div class="row g-4">
+
+
+                                <!-- LIVE DEMO -->
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+
+                                        Live Project URL
+
+                                    </label>
+
+
+                                    <input
+                                        type="url"
+                                        name="project_url"
+                                        class="form-control"
+                                        value="{{ project.project_url|default:'' }}"
+                                        placeholder="https://example.com">
+
+                                </div>
+
+
+                                <!-- GITHUB -->
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+
+                                        GitHub Repository
+
+                                    </label>
+
+
+                                    <input
+                                        type="url"
+                                        name="github_url"
+                                        class="form-control"
+                                        value="{{ project.github_url|default:'' }}"
+                                        placeholder="https://github.com/username/project">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- =================================================
+                             PROJECT IMAGE
+                        ================================================== -->
+
+                        <div class="form-section">
+
+                            <div class="form-section-title">
+
+                                <i class="bi bi-image"></i>
+
+                                <h4>
+                                    Project Image
+                                </h4>
+
+                            </div>
+
+
+                            <div
+                                class="image-upload-area"
+                                onclick="document.getElementById('projectImage').click();">
+
+
+                                <div class="upload-icon">
+
+                                    <i class="bi bi-cloud-arrow-up"></i>
+
+                                </div>
+
+
+                                <h5>
+                                    Upload a new project image
+                                </h5>
+
+
+                                <p>
+                                    PNG, JPG or WEBP — Recommended
+                                    1200 × 800px
+                                </p>
+
+
+                                <input
+                                    type="file"
+                                    name="image"
+                                    id="projectImage"
+                                    accept="image/png,image/jpeg,image/webp">
+
+                            </div>
+
+
+                            <!-- CURRENT IMAGE -->
+
+                            <div class="current-image-box">
+
+                                {% if project.image %}
+
+                                    <img
+                                        src="{{ project.image.url }}"
+                                        class="current-image"
+                                        alt="{{ project.title }}">
+
+                                {% else %}
+
+                                    <img
+                                        src="{% static 'images/project-placeholder.jpg' %}"
+                                        class="current-image"
+                                        alt="No project image">
+
+                                {% endif %}
+
+
+                                <div class="current-image-info">
+
+                                    <strong>
+                                        Current Project Image
+                                    </strong>
+
+                                    <span>
+                                        Upload a new image to replace it.
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- =================================================
+                             DISPLAY SETTINGS
+                        ================================================== -->
+
+                        <div class="form-section">
+
+                            <div class="form-section-title">
+
+                                <i class="bi bi-sliders"></i>
+
+                                <h4>
+                                    Display Settings
+                                </h4>
+
+                            </div>
+
+
+                            <label class="form-label">
+
+                                Project Status
+
+                            </label>
+
+
+                            <div class="status-options">
+
+
+                                <!-- PUBLISHED -->
+
+                                <div class="status-option">
+
+                                    <input
+                                        type="radio"
+                                        name="status"
+                                        value="published"
+                                        id="published"
+
+                                        {% if project.status == "published" %}
+                                            checked
+                                        {% endif %}>
+
+                                    <label for="published">
+
+                                        <i class="bi bi-check-circle"></i>
+
+                                        Published
+
+                                    </label>
+
+                                </div>
+
+
+                                <!-- DRAFT -->
+
+                                <div class="status-option">
+
+                                    <input
+                                        type="radio"
+                                        name="status"
+                                        value="draft"
+                                        id="draft"
+
+                                        {% if project.status == "draft" %}
+                                            checked
+                                        {% endif %}>
+
+                                    <label for="draft">
+
+                                        <i class="bi bi-file-earmark"></i>
+
+                                        Draft
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- =================================================
+                             ACTIONS
+                        ================================================== -->
+
+                        <div class="form-actions">
+
+
+                            <a
+                                href="{% url 'AdminAPP:projects' %}"
+                                class="btn-cancel">
+
+                                Cancel
+
+                            </a>
+
+
+                            <button
+                                type="submit"
+                                class="btn-save">
+
+                                <i class="bi bi-check-lg"></i>
+
+                                Save Changes
+
+                            </button>
+
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 RIGHT — PREVIEW
+            ================================================== -->
+
+            <div>
+
+
+                <!-- PROJECT PREVIEW -->
+
+                <div class="preview-card">
+
+
+                    <div class="preview-header">
+
+                        <h4>
+                            Project Preview
+                        </h4>
+
+                        <p>
+                            How the project will appear
+                        </p>
+
+                    </div>
+
+
+                    <div class="preview-body">
+
+
+                        <div class="project-preview">
+
+
+                            <!-- PREVIEW IMAGE -->
+
+                            {% if project.image %}
+
+                                <img
+                                    src="{{ project.image.url }}"
+                                    class="preview-image"
+                                    alt="{{ project.title }}">
+
+                            {% else %}
+
+                                <img
+                                    src="{% static 'images/project-placeholder.jpg' %}"
+                                    class="preview-image"
+                                    alt="Project preview">
+
+                            {% endif %}
+
+
+                            <div class="preview-content">
+
+
+                                <!-- CATEGORY -->
+
+                                <span class="preview-category">
+
+                                    {{ project.category }}
+
+                                </span>
+
+
+                                <!-- TITLE -->
+
+                                <h5>
+
+                                    {{ project.title }}
+
+                                </h5>
+
+
+                                <!-- DESCRIPTION -->
+
+                                <p>
+
+                                    {{ project.description }}
+
+                                </p>
+
+
+                                <!-- TECHNOLOGIES -->
+
+                                <div class="preview-technologies">
+
+                                    {% if project.technologies %}
+
+                                       {% for technology in project.technologies.split %}
+
+                                            <span class="preview-tech">
+
+                                                {{ technology }}
+
+                                            </span>
+
+                                        {% endfor %}
+
+                                    {% endif %}
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- PROJECT INFO -->
+
+                        <div class="project-info">
+
+
+                            <!-- STATUS -->
+
+                            <div class="info-row">
+
+                                <span class="info-label">
+
+                                    Status
+
+                                </span>
+
+
+                                <span class="status-badge">
+
+                                    <i class="bi bi-circle-fill"></i>
+
+                                    {{ project.get_status_display }}
+
+                                </span>
+
+                            </div>
+
+
+                            <!-- DISPLAY ORDER -->
+
+                            <div class="info-row">
+
+                                <span class="info-label">
+
+                                    Display Order
+
+                                </span>
+
+
+                                <span class="info-value">
+
+                                    {{ project.display_order }}
+
+                                </span>
+
+                            </div>
+
+
+                            <!-- CATEGORY -->
+
+                            <div class="info-row">
+
+                                <span class="info-label">
+
+                                    Category
+
+                                </span>
+
+
+                                <span class="info-value">
+
+                                    {{ project.category }}
+
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     DANGER ZONE
+                ================================================== -->
+
+                <div class="danger-card">
+
+                    <h5>
+
+                        <i class="bi bi-exclamation-triangle me-1"></i>
+
+                        Danger Zone
+
+                    </h5>
+
+
+                    <p>
+
+                        Deleting this project is permanent and
+                        cannot be undone.
+
+                    </p>
+
+
+                    <button
+                        type="button"
+                        class="delete-btn"
+                        onclick="confirmDelete()">
+
+                        <i class="bi bi-trash3 me-1"></i>
+
+                        Delete Project
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     IMAGE PREVIEW JS
+===================================================== -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const projectImage =
+        document.getElementById("projectImage");
+
+    const previewImage =
+        document.querySelector(".preview-image");
+
+    const currentImage =
+        document.querySelector(".current-image");
+
+
+    if (projectImage) {
+
+        projectImage.addEventListener("change", function () {
+
+            const file = this.files[0];
+
+            if (file) {
+
+                const imageURL =
+                    URL.createObjectURL(file);
+
+
+                if (previewImage) {
+                    previewImage.src = imageURL;
+                }
+
+
+                if (currentImage) {
+                    currentImage.src = imageURL;
+                }
+
+            }
+
+        });
+
+    }
+
+});
+
+
+/* =====================================================
+   DELETE BUTTON
+===================================================== */
+
+function confirmDelete() {
+
+    const confirmed = confirm(
+        "Are you sure you want to delete this project?\n\n" +
+        "This action cannot be undone."
+    );
+
+
+    if (confirmed) {
+
+        /*
+         * Your existing backend currently handles
+         * project editing only.
+
+         * The delete button is intentionally not
+         * connected to a delete URL here so your
+         * existing backend code is not changed.
+         */
+
+        alert(
+            "Delete functionality is not connected yet."
+        );
+
+    }
+
+}
+
+</script>
+
+
+{% endblock body %}

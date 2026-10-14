@@ -1,0 +1,321 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+          content="Jesse Portfolio Admin Login">
+    <title>Admin Login | Jesse</title>
+
+
+<!-- =====================================================
+     BOOTSTRAP 5
+====================================================== -->
+<link href="{% static 'css/bootstrap.min.css'%}"
+      rel="stylesheet">
+<!-- =====================================================
+     BOOTSTRAP ICONS
+====================================================== -->
+<link rel="stylesheet"
+      href="{% static 'bootstrap-icons/font/bootstrap-icons.min.css'%}">
+
+    <!-- =====================================================
+         GOOGLE FONTS
+    ====================================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+     <link rel="stylesheet" href="{% static 'css/portfolio.css' %}">
+
+    
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     LOGIN PAGE
+===================================================== -->
+
+<section class="login-page">
+
+
+    <div class="login-container">
+
+
+        <!-- =====================================================
+             BRAND
+        ===================================================== -->
+
+        <div class="login-brand">
+
+
+            <a href="/l"
+               class="brand-logo">
+
+                <span>&lt;</span>Jesse<span>/&gt;</span>
+
+            </a>
+
+
+            <p class="admin-label">
+
+                PORTFOLIO ADMIN PANEL
+
+            </p>
+
+
+        </div>
+
+
+
+        <!-- =====================================================
+             LOGIN CARD
+        ===================================================== -->
+
+        <div class="login-card">
+
+
+            <!-- LOGIN HEADER -->
+
+            <div class="login-header">
+
+
+                <div class="login-icon">
+
+                    <i class="bi bi-shield-lock"></i>
+
+                </div>
+
+
+                <h2>
+
+                    Welcome Back
+
+                </h2>
+
+
+                <p>
+
+                    Sign in to access your portfolio
+                    administration dashboard.
+
+                </p>
+
+
+            </div>
+
+
+
+            <!-- =====================================================
+                 LOGIN FORM
+            ===================================================== -->
+
+            <form id="loginForm" action="" method="POST">
+                     {% for message in messages %}
+               <h4>{{message}}</h4>
+                 {% endfor %}
+                 {% csrf_token %}
+
+                <!-- EMAIL -->
+
+                <div class="mb-4">
+
+
+                    <label class="form-label"
+                           for="email">
+
+                        Email Address
+
+                    </label>
+
+
+                    <div class="input-group">
+
+
+                        <i class="bi bi-envelope input-icon"></i>
+
+
+                        <input
+                            type="email" name="email"
+                            class="form-control"
+                            id="email"
+                            placeholder="Enter your email"
+                            required>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="mb-3">
+
+
+                    <label class="form-label"
+                           for="password">
+
+                        Password
+
+                    </label>
+
+
+                    <div class="input-group">
+
+
+                        <i class="bi bi-lock input-icon"></i>
+
+
+                        <input
+                            type="password" name="password"
+                            class="form-control"
+                            id="password"
+                            placeholder="Enter your password"
+                            required>
+
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="passwordToggle">
+
+                            <i class="bi bi-eye"
+                               id="passwordIcon"></i>
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- REMEMBER ME -->
+
+                <div class="login-options">
+
+
+                    <div class="form-check">
+
+
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="rememberMe">
+
+
+                        <label
+                            class="form-check-label"
+                            for="rememberMe">
+
+                            Remember me
+
+                        </label>
+
+
+                    </div>
+
+
+                    <a href="/forgot-password/"
+                       class="forgot-password">
+
+                        Forgot password?
+
+                    </a>
+                 
+
+
+                </div>
+                
+
+
+                <!-- LOGIN BUTTON -->
+                <button type="submit"class="login-btn">
+                    <i class="bi bi-box-arrow-in-right me-2"></i>
+                    Sign In to Dashboard
+                </button>
+            </form>
+
+
+
+            <!-- =====================================================
+                 DIVIDER
+            ===================================================== -->
+
+            <div class="divider">
+
+                ADMIN ACCESS
+
+            </div>
+             
+
+            <!-- =====================================================
+                 BACK TO WEBSITE
+            ===================================================== -->
+
+            <div class="back-website">
+
+
+                <a href="/">
+
+                    <i class="bi bi-arrow-left me-2"></i>
+
+                    Back to Portfolio Website
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =====================================================
+             FOOTER
+        ===================================================== -->
+
+        <div class="login-footer">
+
+            © 2026 Jesse Portfolio.
+            Secure Administration Area.
+
+        </div>
+
+
+    </div>
+
+
+
+<!-- =====================================================
+     BOOTSTRAP JAVASCRIPT
+===================================================== -->
+
+<script
+    src="{% static 'js/bootstrap.bundle.min.js' %}">
+</script>
+
+
+</body>
+
+</html>

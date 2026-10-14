@@ -1,0 +1,312 @@
+{% extends 'AdminAPP/basic.html' %}
+{% load static %}
+{% block title %} Experience | Admin Dashboard {% endblock title %}
+
+{% block body %}
+
+<div class="content">
+
+
+    <!-- PAGE HEADER -->
+
+    <div class="content-header">
+
+        <div>
+
+            <h1>
+                Experience
+            </h1>
+
+            <p>
+                Manage your professional experience and career history.
+            </p>
+
+        </div>
+
+
+        <a href="/add/add_experiences/"
+           class="btn-primary-custom">
+
+            <i class="bi bi-plus-lg"></i>
+
+            Add Experience
+
+        </a>
+
+    </div>
+
+
+
+    
+
+    <!-- EXPERIENCE TABLE -->
+
+    <div class="table-card">
+
+
+        <div class="table-header">
+
+
+            <h4>
+                All Experience
+            </h4>
+
+
+        </div>
+
+
+
+        <div class="table-responsive">
+           {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill"></i>
+            {{ message }}
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert">
+            </button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+            <table class="table align-middle">
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>Position</th>
+
+                        <th>Company</th>
+
+                        <th>Duration</th>
+
+                        <th>Technologies</th>
+
+                        <th>Status</th>
+
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+
+              {% for experience in newexperience %}
+                <tbody id="experienceTable">
+
+
+                    <tr>
+
+                        <td>
+
+                            <div class="job-title">
+                                {{ experience.title }}
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="company">
+                                {{ experience.company }}
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="date-badge">
+                                {{ experience.start_date }} — {{ experience.end_date }}
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="tech">
+
+                                <span>{{ experience.technologies }}</span>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="status status-active">
+                               {{ experience.get_employment_status_display }}
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="actions">
+
+                                <a href="{% url 'AdminAPP:experience_detail' experience.pk %}"
+                                   class="action-btn action-view">
+
+                                    <i class="bi bi-eye"></i>
+
+                                </a>
+
+
+                                <a href="{% url 'AdminAPP:experience_edit' experience.pk %}"
+                                   class="action-btn action-edit">
+
+                                    <i class="bi bi-pencil"></i>
+
+                                </a>
+
+
+                                <a href="{% url 'AdminAPP:experience_del' experience.pk %}"
+                                   class="action-btn action-delete"
+                                   >
+
+                                    <i class="bi bi-trash"></i>
+
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+                {% endfor %}
+
+            </table>
+
+        </div>
+
+
+
+        <!-- PAGINATION -->
+
+        <div class="pagination-area">
+
+
+            <p>
+                Showing 1 to 4 of 4 experiences
+            </p>
+
+
+            <!-- Pagination -->
+        <nav>
+            <ul class="pagination pagination-sm">
+
+                <!-- Previous -->
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                            &laquo; Previous
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">&laquo; Previous</span>
+                    </li>
+                {% endif %}
+
+                <!-- Page Numbers -->
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <li class="page-item active">
+                            <span class="page-link">{{ num }}</span>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                <!-- Next -->
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                            Next &raquo;
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">Next &raquo;</span>
+                    </li>
+                {% endif %}
+
+            </ul>
+        </nav>
+
+        <p class="text-center text-muted small">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            &mdash; {{ page_obj.paginator.count }} Total Experiences: 
+        </p>
+
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const searchInput =
+            document.getElementById("searchInput");
+
+        if (searchInput) {
+
+            searchInput.addEventListener("keyup", function () {
+
+                let value =
+                    this.value.toLowerCase();
+
+                let rows =
+                    document.querySelectorAll(
+                        "#experienceTable tr"
+                    );
+
+
+                rows.forEach(function (row) {
+
+                    let text =
+                        row.innerText.toLowerCase();
+
+
+                    if (text.includes(value)) {
+
+                        row.style.display = "";
+
+                    } else {
+
+                        row.style.display = "none";
+
+                    }
+
+                });
+
+            });
+
+        }
+
+    });
+
+</script>
+
+{% endblock body %}
